@@ -1,11 +1,11 @@
 ---
 title: "Enzyklopädie der psychoaktiven Pflanzen"
 date: 2026-03-28
-draft: true
+draft: false
 description: "Pflanzen: Botanik, Ethnopharmakologie und Anwendung. Das unentbehrliche Standardwerk von Christian Rätsch mit über 800 Farbfotos"
 tags: ["willkommen", "literatur", "meta"]
 categories: ["Essays"]
-toc: true
+toc: false
 ---
 
 ## Warum dieser Raum existiert
