@@ -1,10 +1,12 @@
 ---
-title: "Willkommen bei Literatur"
+title: "Test Literatur"
 date: 2026-03-28
 draft: false
 description: "Eine Einführung in diesen Raum — was er ist, was er werden wird, und warum das geschriebene Wort noch immer zählt."
-tags: ["willkommen", "literatur", "meta"]
-categories: ["Essays"]
+image: /images/logo.webp
+featured: true
+tags: ["willkommen"]
+categories: ["Test"]
 toc: true
 ---
 
