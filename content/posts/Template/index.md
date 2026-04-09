@@ -1,12 +1,12 @@
 ---
 title: "" #
-author: "" #dieses Beitrags
+author: "" # dieses Beitrags
 date: 2026-03-28
 draft: true # true = unsichbar auf der Website / false = sichtbar
 image: /
 featured: true
-description: ""
-tags: ["Willkommen", "änder mich"] #tags nach denen Sortiert und gesucht werden kann
+description: "" # untertitel
+tags: ["Willkommen", "änder mich"] # tags nach denen Sortiert und gesucht werden kann
 categories: [""] # der resource z.B. Buch, Paper, Website etc.
 toc: false
 ---
