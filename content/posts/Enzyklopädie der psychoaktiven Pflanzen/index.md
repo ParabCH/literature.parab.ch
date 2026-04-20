@@ -17,13 +17,14 @@ tags:
   - Nachschlagewerk
 toc: false
 ---
+Autor des Buches: Christian Rätsch
+
 ## Für wen ist dieses Buch geeignet?
 Wissenschaftler*innne
 Ethnobotaniker*innen
 Kulturgeschichtlich Interessierte
 Sammler*innen
-Ästheten 
-
+Ästhet*innen 
 
 ## Was du in dieser Ressource findest
 Die Enzyklopädie der psychoaktiven Pflanzen von Christian Rätsch ist ein umfassendes systematisches Werk, das Hunderte psychoaktive Pflanzen und Pilze aus der ganzen Welt katalogiesiert. 
