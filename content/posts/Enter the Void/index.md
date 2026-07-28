@@ -17,7 +17,7 @@ tags:
   - Visuell
 ---
 
-## Warum dieser Film?
+## Warum ist dieser Film sehenswert?
 Gaspar Noés Meisterwerk versucht, die Erfahrung eines DMT-Trips und das Verlassen des Körpers (Out-of-Body Experience) cineastisch aus der Ego-Perspektive nachzubilden.
 
 ## Was du in diesem Film findest

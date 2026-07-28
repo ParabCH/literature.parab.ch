@@ -6,10 +6,10 @@ recommendation: "Blue Rabbit"
 date: 2026-07-28
 draft: false
 image: "/images/5meo_doors.png"
-featured: false
+featured: true
 description: "Eine kritische und tiefgehende Auseinandersetzung mit der potentesten psychedelischen Substanz (5-MeO-DMT)."
 categories:
-  - Buch
+  - Film
 tags:
   - 5-MeO-DMT
   - Harm Reduction
