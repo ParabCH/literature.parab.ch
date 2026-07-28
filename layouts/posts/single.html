@@ -4,6 +4,11 @@
     <header style="margin-bottom: 2rem;">
       {{ partial "post-meta.html" . }}
       <h1 style="margin-top: 1rem;">{{ .Title }}</h1>
+      {{ with .Params.resource_author }}
+      <p style="font-size: 1.1rem; color: #666; margin-top: 0.5rem;"> 
+      <strong>Autor/in:</strong> {{ . }} 
+      </p>
+      {{ end }}
       {{ with .Description }}
       <p class="text-muted" style="font-size: 1.125rem; margin-top: 0.75rem;">{{ . }}</p>
       {{ end }}
