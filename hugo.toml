@@ -63,13 +63,8 @@ title = "PSNG Literatur Forum"
 
   [[menus.main]]
     name = "Podcasts"
-    url = "/categories/podcasts/"
+    url = "/categories/podcast/"
     weight = 5
-
-  [[menus.main]]
-    name = "Tags"
-    url = "/tags/"
-    weight = 6
 
 [minify]
   [minify.tdewolff]
