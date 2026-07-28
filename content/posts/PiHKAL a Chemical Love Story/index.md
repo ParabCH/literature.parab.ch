@@ -6,8 +6,6 @@ recommendation: "David"
 date: 2026-03-28
 draft: false
 image: /images/Pihkal.jpg
-=======
-image: "/images/pihkal_shulgin.jpg"
 featured: true
 description: "Autobiografisches Standardwerk und detaillierte Synthese- sowie Bioassay-Anleitung für 179 Phenethylamine."
 categories:
