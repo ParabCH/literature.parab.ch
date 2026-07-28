@@ -53,7 +53,7 @@ title = "PSNG Literatur Forum"
 
   [[menus.main]]
     name = "Bücher"
-    url = "/categories/bücher/"
+    url = "/categories/buch/"
     weight = 3
 
   [[menus.main]]
