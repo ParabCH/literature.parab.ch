@@ -1,14 +1,9 @@
-{{- $pages := where .Site.RegularPages "Section" "posts" -}}
-[
-{{- range $index, $page := $pages }}
-{{- if $index }},{{ end }}
-{
-  "title": {{ $page.Title | jsonify }},
-  "url": {{ $page.RelPermalink | jsonify }},
-  "content": {{ $page.Plain | jsonify }},
-  "tags": {{ $page.Params.tags | default (slice) | jsonify }},
-  "date": {{ $page.Date.Format "2006-01-02" | jsonify }},
-  "summary": {{ $page.Summary | plainify | truncate 200 | jsonify }}
-}
-{{- end }}
-]
+[{{ range $index, $page := .Site.RegularPages }}{{ if $index }},{{ end }}
+  {
+    "title": {{ $page.Title | jsonify }},
+    "permalink": {{ $page.RelPermalink | jsonify }},
+    "author": {{ $page.Params.resource_author | default "" | jsonify }},
+    "summary": {{ $page.Summary | plainify | jsonify }},
+    "content": {{ $page.Plain | jsonify }}
+  }
+{{ end }}]
