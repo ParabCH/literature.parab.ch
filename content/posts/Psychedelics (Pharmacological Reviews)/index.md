@@ -13,7 +13,6 @@ categories:
 tags:
   - Pharmakologie
   - Biochemie
-  - Rezeptoren
   - Expertenwissen
 ---
 

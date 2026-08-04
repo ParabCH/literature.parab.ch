@@ -11,7 +11,7 @@ categories:
 tags:
   - Medizin
   - Therapy
-  - Deutschland
+  - Deutsch
   - Psilocybin
 ---
 

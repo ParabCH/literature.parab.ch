@@ -12,7 +12,6 @@ tags:
   - Chemie
   - Pharmakologie
   - Shulgin
-  - Phenethylamine
 categories: ["Buch"]
 toc: false
 ---
