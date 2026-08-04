@@ -1,7 +1,6 @@
 baseURL = "https://literature.parab.ch/"
 languageCode = "de"
-title = "PSNG Literatur Forum"
-
+title = "PSNG Literatur Blog"
 [pagination]
   pagerSize = 12
   summaryLength = 40
@@ -55,6 +54,10 @@ title = "PSNG Literatur Forum"
     name = "Bücher"
     url = "/categories/buch/"
     weight = 3
+  [[menus.main]]
+    name = "PSNG Hauptseite"
+    url = "https://psng.parab.ch/"
+    weight = 4
 
   [[menus.main]]
     name = "Paper"

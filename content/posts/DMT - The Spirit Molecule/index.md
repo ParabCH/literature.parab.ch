@@ -22,7 +22,6 @@ toc: false
 ## Warum ist dieses Buch lesenwert?
 Rick Strassman erklärt uns kleinschrittig, wie er die Forschung zu DMT Ende der 90er Jahre wiederbelebte.
 
-
 ## Was du in diesem Buch findest
 * **Punkt 1:** Klinische Studien in den USA
 * **Punkt 2:** Erster Blick auf N,N-DMT Erfahrungen im Labor
