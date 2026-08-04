@@ -2,8 +2,8 @@
   <a href="{{ .page.RelPermalink }}" style="text-decoration: none; color: inherit; display: contents;">
     {{ if .featured }}
     <div class="post-card__image">
-      {{ with .page.Params.image }}
-      <img src="{{ . }}" alt="{{ $.page.Title }}">
+      {{ with partial "post-image.html" .page }}
+      <img src="{{ . }}" alt="{{ $.page.Title }}" loading="lazy" decoding="async">
       {{ else }}
       <span>Beitrag</span>
       {{ end }}

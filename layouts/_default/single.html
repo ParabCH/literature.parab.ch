@@ -9,6 +9,12 @@
       {{ end }}
     </header>
 
+    {{ with partial "post-image.html" . }}
+    <figure class="post-hero">
+      <img src="{{ . }}" alt="{{ $.Title }}" loading="lazy" decoding="async">
+    </figure>
+    {{ end }}
+
     {{ partial "toc.html" . }}
 
     <div class="prose">

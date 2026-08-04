@@ -76,6 +76,23 @@
   }
 }
 
+// --- Post hero image (single) ---
+.post-hero {
+  margin: 0 0 $spacing-10;
+  border-radius: $border-radius-lg;
+  overflow: hidden;
+  background: $surface-container;
+  box-shadow: $shadow-ambient;
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 520px;
+    object-fit: cover;
+  }
+}
+
 // --- Section headers ---
 .section-header {
   margin-bottom: $spacing-10;

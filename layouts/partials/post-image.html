@@ -1,0 +1,23 @@
+{{- /*
+  Gibt die URL des Beitragsbildes zurück – oder einen leeren String, wenn kein
+  Bild gesetzt ist bzw. die Datei nicht existiert.
+  Unterstützt: Page Resources (Bild im Beitragsordner), Pfade unter /static
+  und absolute URLs.
+*/ -}}
+{{- $url := "" -}}
+{{- $path := .Params.image | default "" | strings.TrimSpace -}}
+{{- if and $path (ne $path "/") -}}
+  {{- if or (hasPrefix $path "http://") (hasPrefix $path "https://") (hasPrefix $path "//") -}}
+    {{- $url = $path -}}
+  {{- else -}}
+    {{- with .Resources.GetMatch (strings.TrimPrefix "./" $path) -}}
+      {{- $url = .RelPermalink -}}
+    {{- end -}}
+    {{- if not $url -}}
+      {{- if os.FileExists (printf "static/%s" (strings.TrimPrefix "/" $path)) -}}
+        {{- $url = $path | relURL -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- $url -}}
