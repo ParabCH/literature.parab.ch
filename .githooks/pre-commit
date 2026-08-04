@@ -1,0 +1,137 @@
+#!/usr/bin/env bash
+#
+# Reject file and folder names that are illegal or hazardous on Windows.
+#
+# Checked for every path component (each folder plus the file name) of every
+# staged path:
+#   - the characters  < > : " | ? *  \  and any control character
+#   - trailing spaces or trailing dots
+#   - leading spaces
+#   - the reserved DOS device names (CON, PRN, AUX, NUL, COM1-9, LPT1-9)
+#
+# Bypass with `git commit --no-verify` if you really know better.
+
+set -u
+
+if [ -t 1 ]; then
+	BOLD=$(printf '\033[1m'); RED=$(printf '\033[31m')
+	YELLOW=$(printf '\033[33m'); DIM=$(printf '\033[2m'); OFF=$(printf '\033[0m')
+else
+	BOLD=; RED=; YELLOW=; DIM=; OFF=
+fi
+
+ILLEGAL_CLASS='[<>:"|?*\\]'
+RESERVED='^(CON|PRN|AUX|NUL|COM[1-9]|LPT[1-9])(\..*)?$'
+
+# Human name for each illegal character, used in the report.
+char_name() {
+	case "$1" in
+		'<') printf 'less-than sign' ;;
+		'>') printf 'greater-than sign' ;;
+		':') printf 'colon' ;;
+		'"') printf 'double quote' ;;
+		'|') printf 'pipe' ;;
+		'?') printf 'question mark' ;;
+		'*') printf 'asterisk' ;;
+		'\') printf 'backslash' ;;
+		*)   printf 'illegal character' ;;
+	esac
+}
+
+# Everything that is wrong with a single path component, one reason per line.
+# Empty output means the component is fine.
+component_problems() {
+	component=$1
+
+	# Illegal characters. LC_ALL=C keeps grep byte-wise, which is safe here
+	# because every character we look for is ASCII and UTF-8 continuation
+	# bytes are always >= 0x80 (so umlauts and friends never match).
+	found=$(printf '%s' "$component" | LC_ALL=C grep -o "$ILLEGAL_CLASS" | sort -u)
+	if [ -n "$found" ]; then
+		while IFS= read -r ch; do
+			printf 'illegal character  %s  (%s)\n' "$ch" "$(char_name "$ch")"
+		done <<-EOF
+			$found
+		EOF
+	fi
+
+	if printf '%s' "$component" | LC_ALL=C grep -q '[[:cntrl:]]'; then
+		printf 'contains a control character (tab, newline, ...)\n'
+	fi
+
+	case "$component" in
+		*' ') printf 'trailing space  (Windows silently strips it, then paths stop matching)\n' ;;
+		*'.') printf 'trailing dot  (Windows silently strips it, then paths stop matching)\n' ;;
+	esac
+
+	case "$component" in
+		' '*) printf 'leading space\n' ;;
+	esac
+
+	if printf '%s' "$component" | LC_ALL=C grep -Eqi "$RESERVED"; then
+		printf 'reserved DOS device name (CON, PRN, AUX, NUL, COM1-9, LPT1-9) — unusable on Windows\n'
+	fi
+}
+
+report=
+bad_paths=0
+
+while IFS= read -r -d '' path; do
+	path_reported=0
+
+	# Split the path on "/" and check every folder and the file name itself.
+	remainder=$path
+	depth=0
+	while [ -n "$remainder" ]; do
+		case "$remainder" in
+			*/*) component=${remainder%%/*}; remainder=${remainder#*/}; kind=folder ;;
+			*)   component=$remainder;      remainder=;                kind=file   ;;
+		esac
+		depth=$((depth + 1))
+		[ -n "$component" ] || continue
+
+		problems=$(component_problems "$component")
+		[ -n "$problems" ] || continue
+
+		if [ "$path_reported" -eq 0 ]; then
+			report="${report}
+  ${BOLD}${path}${OFF}"
+			path_reported=1
+			bad_paths=$((bad_paths + 1))
+		fi
+
+		report="${report}
+      ${YELLOW}${kind} name${OFF} \"${component}\""
+		while IFS= read -r problem; do
+			report="${report}
+          ${RED}-${OFF} ${problem}"
+		done <<-EOF
+			$problems
+		EOF
+	done
+done < <(git diff --cached --name-only --diff-filter=ACMR -z)
+
+if [ "$bad_paths" -eq 0 ]; then
+	exit 0
+fi
+
+cat >&2 <<EOF
+
+${RED}${BOLD}Commit rejected: $bad_paths staged path(s) have names that break on Windows.${OFF}
+${report}
+
+${BOLD}Rename them, then stage the rename:${OFF}
+    git mv "old name" "new name"
+
+${BOLD}Windows forbids in file and folder names:${OFF}
+    < > : " | ? * \\  and control characters
+    trailing spaces and trailing dots
+    the device names CON, PRN, AUX, NUL, COM1-9, LPT1-9
+
+A repo containing these cannot be cloned or checked out on Windows at all —
+git aborts the whole checkout, not just the offending file.
+
+${DIM}Override (only if you are certain): git commit --no-verify${OFF}
+
+EOF
+exit 1
