@@ -1,5 +1,6 @@
 .toc-sidebar {
-  position: sticky;
+  // TODO FIX!
+  // position: sticky;
   top: calc(#{$nav-height} + #{$spacing-8});
   align-self: start;
 
