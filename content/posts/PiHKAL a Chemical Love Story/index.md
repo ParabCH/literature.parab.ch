@@ -8,7 +8,11 @@ draft: false
 image: /images/Pihkal.jpg
 featured: true
 description: "Autobiografisches Standardwerk und detaillierte Synthese- sowie Bioassay-Anleitung für 179 Phenethylamine."
-tags: ["Psychedelika", "Chemie", "Biografie"]
+tags:
+  - Chemie
+  - Pharmakologie
+  - Shulgin
+  - Phenethylamine
 categories: ["Buch"]
 toc: false
 ---
