@@ -1,13 +1,17 @@
 <article class="post-card{{ if .featured }} post-card--featured{{ end }}">
   <a href="{{ .page.RelPermalink }}" style="text-decoration: none; color: inherit; display: contents;">
-    {{ if .featured }}
+    {{ with partial "post-image.html" .page }}
     <div class="post-card__image">
-      {{ with partial "post-image.html" .page }}
       <img src="{{ . }}" alt="{{ $.page.Title }}" loading="lazy" decoding="async">
-      {{ else }}
-      <span>Beitrag</span>
-      {{ end }}
     </div>
+    {{ else }}
+    {{/* Ohne Bild: nur der grosse Beitrag behält den Platzhalter, damit sein
+         zweispaltiges Layout nicht zusammenfällt. */}}
+    {{ if $.featured }}
+    <div class="post-card__image">
+      <span>Beitrag</span>
+    </div>
+    {{ end }}
     {{ end }}
     <div>
       <div class="post-card__meta">

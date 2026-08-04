@@ -92,3 +92,10 @@
     object-fit: cover;
   }
 }
+
+// In der Übersicht sitzt das Bild über dem Text, nicht daneben wie beim
+// grossen Beitrag (der sein Gitter-Gap schon selbst mitbringt).
+.post-card:not(.post-card--featured) .post-card__image {
+  margin-bottom: $spacing-6;
+  flex-shrink: 0;
+}
