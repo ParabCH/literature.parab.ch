@@ -58,7 +58,7 @@
       }
 
       results.innerHTML = matches.slice(0, 10).map(function (item) {
-        return '<a href="' + item.url + '" class="search-result">' +
+        return '<a href="' + item.permalink + '" class="search-result">' +
           '<div class="search-result__title">' + escapeHtml(item.title) + '</div>' +
           '<div class="search-result__excerpt">' + escapeHtml(item.summary) + '</div>' +
           '</a>';
