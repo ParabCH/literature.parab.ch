@@ -56,7 +56,7 @@ title = "PSNG Literatur Blog"
     weight = 3
   [[menus.main]]
     name = "PSNG Hauptseite"
-    url = "https://psng.parab.ch/"
+    url = "https://psng.info/"
     weight = 4
 
   [[menus.main]]
