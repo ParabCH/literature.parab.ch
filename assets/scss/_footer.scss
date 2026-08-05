@@ -36,6 +36,16 @@
     gap: $spacing-12;
   }
 
+  &__button-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-3;
+  }
+
+  &__button {
+    margin: 0;
+  }
+
   &__col-title {
     font-family: $font-ui;
     font-size: $fs-xs;

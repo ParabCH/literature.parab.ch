@@ -11,6 +11,17 @@
   padding-top: $nav-height;
 }
 
+.page-bg {
+  position: fixed;
+  inset: 0;
+  background-image: url('../images/background.png');
+  background-size: cover;
+  background-position: center;
+  background-color: $surface;
+  z-index: -1;
+  pointer-events: none;
+}
+
 .main-content {
   flex: 1;
 }
