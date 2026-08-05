@@ -5,7 +5,7 @@ publication: "1962"
 recommendation: "Blue Rabbit"
 date: 2026-07-28
 draft: false
-image: "/images/huxley_doors.jpg"
+image: ""
 featured: true
 description: "Huxleys utopischer Entwurf einer Gesellschaftsform, in der Psychedelika der alltäglichen Normalität angehören"
 categories:
