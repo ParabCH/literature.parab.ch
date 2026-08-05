@@ -5,7 +5,7 @@ publication: "1954"
 recommendation: "Blue Rabbit"
 date: 2026-07-28
 draft: false
-image: "/images/huxley_doors.jpg"
+image: ""
 featured: true
 description: "Der essenzielle Klassiker der psychedelischen Literatur und Huxleys utopischer Gegenentwurf 'Pala'."
 categories:
