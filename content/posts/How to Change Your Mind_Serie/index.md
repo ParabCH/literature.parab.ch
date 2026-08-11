@@ -7,7 +7,7 @@ date: 2026-07-28
 draft: false
 image: "/images/htcym_netflix.jpg"
 featured: true
-description: "Vierteilige Netflix-Dokumentation über LSD, Psilocybin, MDMA und Meskalin."
+description: "Vierteilige Netflix-Dokumentation über LSD, Psilocybin, MDMA & Meskalin."
 categories:
   - Film
 tags:

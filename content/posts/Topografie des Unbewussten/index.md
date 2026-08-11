@@ -18,7 +18,7 @@ tags:
 ---
 
 ## Warum dieses Buch?
-Stanislav Grof gilt als einer der Pioniere der psychedelischen Psychotherapie. Das Buch bietet ein tiefes Verständnis dafür, wie LSD in der tiefenpsychologisch fundierten Psychotherapie der 60er Jahre eingesetzt wurde.
+Stanislav Grof gilt als einer der Pioniere der psychedelischen Psychotherapie. Dieses Buch bietet ein tiefes Verständnis dafür, wie LSD in der tiefenpsychologisch fundierten Psychotherapie der 60er Jahre eingesetzt wurde.
 
 ## Was du in diesem Buch findest
 * **Perinatale Matrizen:** Grofs Modell der Geburtserfahrungen und deren Prägung auf die menschliche Psyche.
