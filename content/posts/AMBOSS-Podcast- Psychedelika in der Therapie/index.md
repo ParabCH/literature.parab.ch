@@ -4,7 +4,7 @@ resource_author: "Dr. Andrea Jungaberle (Interview)"
 date: 2026-07-28
 draft: false
 image: "/images/amboss_podcast.jpg"
-featured: false
+featured: true
 description: "Fundierter medizinischer Einblick in die aktuelle Studienlage, Psychotherapie und klinische Praxis in Deutschland."
 categories:
   - Podcast

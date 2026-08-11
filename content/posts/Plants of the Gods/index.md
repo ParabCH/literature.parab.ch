@@ -6,7 +6,7 @@ recommendation: "Blue Rabbit"
 date: 2026-07-28
 draft: false
 image: "/images/plants_of_the_gods.jpg"
-featured: false
+featured: true
 description: "Das interdisziplinäre Meisterwerk der Pioniere der Ethnobotanik und Chemie."
 categories:
   - Buch

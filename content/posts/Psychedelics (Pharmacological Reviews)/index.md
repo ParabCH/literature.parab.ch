@@ -6,7 +6,7 @@ recommendation: "Blue Rabbit"
 date: 2026-07-28
 draft: false
 image: "/images/nichols_review.jpg"
-featured: false
+featured: true
 description: "Das umfassendste biochemische und pharmakologische Standard-Review zur Wirkungsweise psychedelischer Substanzen."
 categories:
   - Paper

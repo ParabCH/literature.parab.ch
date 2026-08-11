@@ -6,7 +6,7 @@ recommendation: "Blue Rabbit"
 date: 2026-07-28
 draft: false
 image: "/images/enter_the_void.jpg"
-featured: false
+featured: true
 description: "Ein visuelles Experiment über Leben, Tod, DMT und das Tibetische Totenbuch im neongetränkten Tokio."
 categories:
   - Film

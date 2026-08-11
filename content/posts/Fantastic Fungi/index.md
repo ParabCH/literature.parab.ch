@@ -6,7 +6,7 @@ recommendation: "Blue Rabbit"
 date: 2026-07-28
 draft: false
 image: "/images/fantastic_fungi.jpg"
-featured: false
+featured: true
 description: "Visuell atemberaubender Dokumentarfilm über das Pilzreich, Myzel-Netzwerke und Psilocybin."
 categories:
   - Film

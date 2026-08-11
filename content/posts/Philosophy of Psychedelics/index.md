@@ -6,7 +6,7 @@ recommendation: "Blue Rabbit"
 date: 2026-07-28
 draft: false
 image: "/images/letheby_philosophy.jpg"
-featured: false
+featured: true
 description: "Eine erkenntnistheoretische und philosophische Analyse psychedelischer Erfahrungen aus Sicht der Philosophie des Geistes."
 categories:
   - Buch

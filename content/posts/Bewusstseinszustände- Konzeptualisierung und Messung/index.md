@@ -6,7 +6,7 @@ recommendation: "Blue Rabbit"
 date: 2026-07-28
 draft: false
 image: "/images/passie_bewusstsein.jpg"
-featured: false
+featured: true
 description: "Fundierte Einführung in veränderte Bewusstseinszustände aus medizinisch-psychiatrischer Sicht im deutschsprachigen Raum."
 categories:
   - Buch
