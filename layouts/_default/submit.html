@@ -1,0 +1,234 @@
+{{ define "main" }}
+
+{{/* Vorhandene Kategorien und Tags aus dem Bestand ziehen, damit das Formular
+     nicht auseinanderläuft, sobald jemand eine neue Kategorie anlegt. */}}
+{{- $cats := slice }}
+{{- $tags := slice }}
+{{- range .Site.RegularPages }}
+  {{- range .Params.categories }}{{ $cats = $cats | append . }}{{ end }}
+  {{- range .Params.tags }}{{ $tags = $tags | append . }}{{ end }}
+{{- end }}
+{{- $cats = $cats | uniq | sort }}
+{{- $tags = $tags | uniq | sort }}
+
+{{- $s := .Site.Params.submit | default dict }}
+
+<div class="container submit"
+     id="submit-app"
+     data-cloud-name="{{ $s.cloudName }}"
+     data-upload-preset="{{ $s.uploadPreset }}"
+     data-folder="{{ $s.folder }}"
+     data-mail-to="{{ $s.mailTo }}"
+     data-mail-cc="{{ $s.mailCc }}"
+     data-max-image-mb="{{ $s.maxImageMB | default 8 }}">
+
+  <header class="submit__header">
+    <h1 class="submit__title">{{ .Title }}</h1>
+    {{ with .Description }}<p class="submit__subtitle">{{ . }}</p>{{ end }}
+  </header>
+
+  {{ with .Content }}
+  <div class="prose" style="max-width: 720px; margin: 0 auto 3rem;">{{ . }}</div>
+  {{ end }}
+
+  <div class="submit__tabs" role="tablist">
+    <button type="button" class="submit__tab submit__tab--active" id="tab-form" role="tab">Formular</button>
+    <button type="button" class="submit__tab" id="tab-preview" role="tab">Vorschau</button>
+  </div>
+
+  <div class="submit__grid">
+
+    {{/* ---------------- Formular ---------------- */}}
+    <form class="submit__form" id="submit-form" novalidate>
+
+      <section class="submit__section">
+        <h2 class="submit__section-title">Über die Ressource</h2>
+        <p class="submit__section-hint">Worum geht es? Diese Angaben landen im Kopf des Beitrags.</p>
+
+        <div class="submit__field" id="field-title">
+          <label class="submit__label" for="f-title">Titel<span class="submit__required">*</span></label>
+          <input class="input" type="text" id="f-title" placeholder="Plants of the Gods: Their Sacred, Healing, and Hallucinogenic Powers">
+          <span class="submit__error">Bitte gib einen Titel an.</span>
+        </div>
+
+        <div class="submit__row">
+          <div class="submit__field">
+            <label class="submit__label" for="f-author">Autor/in der Ressource</label>
+            <input class="input" type="text" id="f-author" placeholder="Richard Evans Schultes, Albert Hofmann">
+          </div>
+          <div class="submit__field">
+            <label class="submit__label" for="f-publication">Veröffentlichung</label>
+            <input class="input" type="text" id="f-publication" placeholder="1979 / 1992 (Healing Arts Press)">
+          </div>
+        </div>
+
+        <div class="submit__row">
+          <div class="submit__field" id="field-category">
+            <label class="submit__label" for="f-category">Kategorie<span class="submit__required">*</span></label>
+            <select class="input" id="f-category">
+              <option value="">Bitte wählen…</option>
+              {{- range $cats }}
+              <option value="{{ . }}">{{ . }}</option>
+              {{- end }}
+              <option value="__other__">Andere…</option>
+            </select>
+            <input class="input submit__hidden" type="text" id="f-category-other"
+                   placeholder="Neue Kategorie" style="margin-top: 0.5rem;">
+            <span class="submit__error">Bitte wähle eine Kategorie.</span>
+          </div>
+
+          <div class="submit__field">
+            <label class="submit__label" for="f-tag-input">Tags</label>
+            <div class="submit__tags" id="f-tags">
+              <input class="submit__tag-input" type="text" id="f-tag-input"
+                     list="tag-suggestions" placeholder="Tag eingeben, Enter drücken">
+            </div>
+            <datalist id="tag-suggestions">
+              {{- range $tags }}
+              <option value="{{ . }}"></option>
+              {{- end }}
+            </datalist>
+            <span class="submit__hint">Enter oder Komma fügt einen Tag hinzu. Bestehende Tags werden vorgeschlagen.</span>
+          </div>
+        </div>
+
+        <div class="submit__field" id="field-description">
+          <label class="submit__label" for="f-description">Kurzbeschreibung<span class="submit__required">*</span></label>
+          <textarea class="input" id="f-description" rows="2"
+                    placeholder="Das interdisziplinäre Meisterwerk der Pioniere der Ethnobotanik und Chemie."></textarea>
+          <span class="submit__hint">Ein bis zwei Sätze. Erscheint als Untertitel und in der Übersicht.</span>
+          <span class="submit__error">Bitte gib eine Kurzbeschreibung an.</span>
+        </div>
+      </section>
+
+      <section class="submit__section">
+        <h2 class="submit__section-title">Cover-Bild</h2>
+        <p class="submit__section-hint">
+          Optional. Ohne Bild erzeugt die Redaktion automatisch eine Kachel im Seitenlayout.
+        </p>
+
+        <div class="submit__field">
+          <div class="submit__dropzone" id="f-dropzone" tabindex="0" role="button"
+               aria-label="Bild auswählen">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="none"
+                 viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M12 16.5V4.5m0 0L7.5 9M12 4.5 16.5 9M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5"/>
+            </svg>
+            <span><strong>Bild auswählen</strong> oder hierher ziehen</span>
+            <span class="submit__dropzone-hint">JPG, PNG oder WebP · max. <span id="f-max-mb">8</span> MB</span>
+          </div>
+          <input type="file" id="f-image" accept="image/jpeg,image/png,image/webp" class="submit__hidden">
+
+          <div class="submit__thumb" id="f-thumb">
+            <img id="f-thumb-img" alt="Vorschau des Cover-Bilds">
+            <div class="submit__thumb-meta">
+              <div class="submit__thumb-name" id="f-thumb-name"></div>
+              <div class="submit__thumb-size" id="f-thumb-size"></div>
+            </div>
+            <button type="button" class="btn btn--surface" id="f-thumb-remove">Entfernen</button>
+          </div>
+          <span class="submit__error" id="f-image-error"></span>
+        </div>
+      </section>
+
+      <section class="submit__section">
+        <h2 class="submit__section-title">Inhalt</h2>
+        <p class="submit__section-hint">
+          Die Gliederung ist ein Vorschlag — überschreib sie ruhig. Rechts siehst du live, wie es aussieht.
+        </p>
+
+        <div class="submit__field">
+          <div class="submit__toolbar" id="f-toolbar">
+            <button type="button" class="submit__tool" data-md="h2" title="Überschrift">H2</button>
+            <button type="button" class="submit__tool" data-md="h3" title="Unterüberschrift">H3</button>
+            <span class="submit__tool-sep"></span>
+            <button type="button" class="submit__tool" data-md="bold" title="Fett"><strong>B</strong></button>
+            <button type="button" class="submit__tool" data-md="italic" title="Kursiv"><em>I</em></button>
+            <span class="submit__tool-sep"></span>
+            <button type="button" class="submit__tool" data-md="ul" title="Liste">&bull; Liste</button>
+            <button type="button" class="submit__tool" data-md="ol" title="Nummerierte Liste">1. Liste</button>
+            <button type="button" class="submit__tool" data-md="quote" title="Zitat">&rdquo; Zitat</button>
+            <span class="submit__tool-sep"></span>
+            <button type="button" class="submit__tool" data-md="link" title="Link">Link</button>
+          </div>
+          <textarea class="input submit__editor" id="f-body" rows="18"></textarea>
+        </div>
+      </section>
+
+      <section class="submit__section">
+        <h2 class="submit__section-title">Über dich</h2>
+        <p class="submit__section-hint">
+          Damit die Redaktion nachfragen kann. Deine E-Mail steht nur in der Nachricht, nie im Beitrag.
+        </p>
+
+        <div class="submit__row">
+          <div class="submit__field" id="field-sender-name">
+            <label class="submit__label" for="f-sender-name">Dein Name<span class="submit__required">*</span></label>
+            <input class="input" type="text" id="f-sender-name" placeholder="Vorname Nachname">
+            <span class="submit__error">Bitte gib deinen Namen an.</span>
+          </div>
+          <div class="submit__field" id="field-sender-email">
+            <label class="submit__label" for="f-sender-email">Deine E-Mail<span class="submit__required">*</span></label>
+            <input class="input" type="email" id="f-sender-email" placeholder="name@example.com">
+            <span class="submit__error">Bitte gib eine gültige E-Mail-Adresse an.</span>
+          </div>
+        </div>
+
+        <div class="submit__field">
+          <label class="submit__label" for="f-recommendation">Empfehlung von</label>
+          <input class="input" type="text" id="f-recommendation" placeholder="Name oder Pseudonym">
+          <span class="submit__hint">Erscheint im Beitrag. Leer lassen, wenn du anonym bleiben willst.</span>
+        </div>
+
+        <div class="submit__field">
+          <label class="submit__label" for="f-note">Anmerkung an die Redaktion</label>
+          <textarea class="input" id="f-note" rows="3"
+                    placeholder="Kontext, Quellen, Hinweise zum Bildrecht …"></textarea>
+          <span class="submit__hint">Geht nur an die Redaktion und wird nicht veröffentlicht.</span>
+        </div>
+      </section>
+
+      <div class="submit__actions">
+        <button type="submit" class="btn btn--primary" id="f-submit">Beitrag einreichen</button>
+        <button type="button" class="btn btn--ghost" id="f-download">.md herunterladen</button>
+        <span class="submit__spacer"></span>
+        <button type="button" class="btn btn--surface" id="f-reset">Zurücksetzen</button>
+      </div>
+
+      <div class="submit__status" id="f-status" role="status" aria-live="polite"></div>
+    </form>
+
+    {{/* ---------------- Vorschau ---------------- */}}
+    <aside class="submit__preview-pane" id="submit-preview-pane">
+      <div class="submit__preview-label">
+        <span>Vorschau</span>
+        <button type="button" class="submit__preview-toggle" id="f-toggle-raw">Markdown anzeigen</button>
+      </div>
+
+      <div id="f-preview">
+        <figure class="submit__preview-hero submit__hidden" id="p-hero">
+          <img id="p-hero-img" alt="">
+        </figure>
+
+        <div class="submit__preview-meta" id="p-meta"></div>
+        <h1 class="submit__preview-title" id="p-title">
+          <span class="submit__preview-placeholder">Titel der Ressource</span>
+        </h1>
+        <div class="submit__preview-meta" id="p-author"></div>
+        <p class="submit__preview-desc" id="p-desc"></p>
+        <div class="chip-group" id="p-tags"></div>
+        <div class="submit__preview-divider"></div>
+        <div class="prose" id="p-body"></div>
+      </div>
+
+      <pre class="submit__raw" id="f-raw"></pre>
+    </aside>
+
+  </div>
+</div>
+{{ end }}
+
+{{ define "scripts" }}
+<script src="{{ (resources.Get "js/submit.js" | minify | fingerprint).RelPermalink }}"></script>
+{{ end }}

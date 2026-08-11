@@ -22,5 +22,6 @@
   <script src="{{ (resources.Get "js/reading-progress.js" | minify | fingerprint).RelPermalink }}"></script>
   {{- end }}
   <script src="{{ (resources.Get "js/search.js" | minify | fingerprint).RelPermalink }}"></script>
+  {{- block "scripts" . }}{{ end }}
 </body>
 </html>

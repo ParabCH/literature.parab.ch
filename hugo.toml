@@ -21,6 +21,17 @@ title = "PSNG Literatur Blog"
   github = ""
   twitter = ""
 
+# Einreichungsformular unter /einreichen/.
+# cloudName + uploadPreset leer lassen = kein Upload; das Formular laedt die
+# .md dann lokal herunter und bittet um manuelles Anhaengen.
+[params.submit]
+  cloudName = "snxstp2a"
+  uploadPreset = "psng-literature-submissions"
+  folder = "submissions"
+  mailTo = "psngblog@gmail.com"
+  mailCc = ""
+  maxImageMB = 8
+
 [markup]
   [markup.tableOfContents]
     startLevel = 2
@@ -68,6 +79,11 @@ title = "PSNG Literatur Blog"
     name = "Podcasts"
     url = "/categories/podcast/"
     weight = 5
+
+  [[menus.main]]
+    name = "Beitrag einreichen"
+    url = "/einreichen/"
+    weight = 6
 
 [minify]
   [minify.tdewolff]

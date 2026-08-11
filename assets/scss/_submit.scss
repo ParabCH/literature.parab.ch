@@ -1,0 +1,546 @@
+// ===========================================
+// Beitrag einreichen — Formular + Live-Vorschau
+// ===========================================
+
+.submit {
+  padding: $spacing-12 0 $spacing-16;
+
+  &__header {
+    max-width: $content-width;
+    margin: 0 auto $spacing-10;
+    text-align: center;
+  }
+
+  &__title {
+    font-size: $fs-3xl;
+    margin-bottom: $spacing-4;
+  }
+
+  &__subtitle {
+    color: $on-surface-variant;
+    font-size: $fs-md;
+    line-height: $lh-normal;
+  }
+
+  // --- Zweispaltiges Layout: Formular | Vorschau ---
+  &__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: $spacing-10;
+    align-items: start;
+  }
+
+  &__preview-pane {
+    position: sticky;
+    top: calc(#{$nav-height} + #{$spacing-4});
+    max-height: calc(100vh - #{$nav-height} - #{$spacing-8});
+    overflow-y: auto;
+    background: $surface;
+    border: $ghost-border;
+    border-radius: $border-radius-lg;
+    box-shadow: $shadow-ambient;
+    padding: $spacing-8;
+  }
+
+  // --- Umschalter (nur mobil sichtbar) ---
+  &__tabs {
+    display: none;
+    gap: $spacing-2;
+    margin-bottom: $spacing-6;
+    background: $surface-container;
+    padding: $spacing-1;
+    border-radius: $border-radius-xl;
+  }
+
+  &__tab {
+    flex: 1;
+    font-family: $font-ui;
+    font-size: $fs-sm;
+    font-weight: $fw-semibold;
+    padding: $spacing-3 $spacing-4;
+    border: none;
+    border-radius: $border-radius-xl;
+    background: transparent;
+    color: $on-surface-variant;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &--active {
+      background: $surface;
+      color: $primary;
+      box-shadow: $shadow-elevated;
+    }
+  }
+
+  // --- Formularabschnitte ---
+  &__section {
+    background: $surface;
+    border: $ghost-border;
+    border-radius: $border-radius-lg;
+    padding: $spacing-6;
+    margin-bottom: $spacing-6;
+    box-shadow: $shadow-ambient;
+  }
+
+  &__section-title {
+    font-family: $font-display;
+    font-size: $fs-lg;
+    font-weight: $fw-semibold;
+    margin-bottom: $spacing-1;
+  }
+
+  &__section-hint {
+    font-family: $font-ui;
+    font-size: $fs-sm;
+    color: $on-surface-variant;
+    margin-bottom: $spacing-5;
+    line-height: $lh-normal;
+  }
+
+  &__field {
+    margin-bottom: $spacing-5;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $spacing-4;
+
+    @media (max-width: $bp-sm) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__label {
+    display: block;
+    font-family: $font-ui;
+    font-size: $fs-sm;
+    font-weight: $fw-medium;
+    color: $on-surface;
+    margin-bottom: $spacing-2;
+  }
+
+  &__required {
+    color: $primary-lighter;
+    margin-left: 2px;
+  }
+
+  &__hint {
+    display: block;
+    font-family: $font-ui;
+    font-size: $fs-xs;
+    color: $outline;
+    margin-top: $spacing-2;
+    line-height: $lh-normal;
+  }
+
+  &__error {
+    display: none;
+    font-family: $font-ui;
+    font-size: $fs-xs;
+    color: #B3261E;
+    margin-top: $spacing-2;
+  }
+
+  &__field--invalid {
+    .submit__error {
+      display: block;
+    }
+
+    .input {
+      border-color: rgba(#B3261E, 0.5);
+    }
+  }
+
+  textarea.input {
+    resize: vertical;
+    font-family: $font-body;
+    line-height: $lh-normal;
+  }
+
+  select.input {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1.5 6 6.5l5-5' stroke='%2374777F' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right $spacing-5 center;
+    padding-right: $spacing-10;
+    cursor: pointer;
+  }
+
+  // --- Tag-Eingabe ---
+  &__tags {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: $spacing-2;
+    padding: $spacing-2 $spacing-3;
+    border: $ghost-border;
+    border-radius: $border-radius;
+    background: $surface;
+    transition: border-color $transition-fast, box-shadow $transition-fast;
+
+    &:focus-within {
+      border-color: rgba($primary, 0.4);
+      box-shadow: 0 0 0 3px rgba($primary, 0.08);
+    }
+  }
+
+  &__tag {
+    display: inline-flex;
+    align-items: center;
+    gap: $spacing-1;
+    font-family: $font-ui;
+    font-size: $fs-xs;
+    font-weight: $fw-medium;
+    padding: $spacing-1 $spacing-2 $spacing-1 $spacing-3;
+    border-radius: $border-radius-xl;
+    background: rgba($primary, 0.08);
+    color: $primary;
+  }
+
+  &__tag-remove {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    border: none;
+    border-radius: 50%;
+    background: transparent;
+    color: $primary;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 1;
+    padding: 0;
+
+    &:hover {
+      background: rgba($primary, 0.15);
+    }
+  }
+
+  &__tag-input {
+    flex: 1;
+    min-width: 120px;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-family: $font-ui;
+    font-size: $fs-base;
+    color: $on-surface;
+    padding: $spacing-2 0;
+
+    &::placeholder {
+      color: $outline;
+    }
+  }
+
+  // --- Bild-Upload ---
+  &__dropzone {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-2;
+    padding: $spacing-8 $spacing-4;
+    border: 2px dashed rgba($outline-variant, 0.6);
+    border-radius: $border-radius;
+    background: $surface-container;
+    color: $on-surface-variant;
+    font-family: $font-ui;
+    font-size: $fs-sm;
+    text-align: center;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover,
+    &--dragover {
+      border-color: rgba($primary, 0.5);
+      background: rgba($primary, 0.04);
+      color: $primary;
+    }
+
+    svg {
+      opacity: 0.6;
+    }
+  }
+
+  &__dropzone-hint {
+    font-size: $fs-xs;
+    color: $outline;
+  }
+
+  &__thumb {
+    display: none;
+    align-items: center;
+    gap: $spacing-4;
+    padding: $spacing-3;
+    border: $ghost-border;
+    border-radius: $border-radius;
+    background: $surface-container;
+
+    &--visible {
+      display: flex;
+    }
+
+    img {
+      width: 72px;
+      height: 96px;
+      object-fit: cover;
+      border-radius: $border-radius-sm;
+      flex-shrink: 0;
+    }
+  }
+
+  &__thumb-meta {
+    flex: 1;
+    min-width: 0;
+    font-family: $font-ui;
+    font-size: $fs-sm;
+  }
+
+  &__thumb-name {
+    font-weight: $fw-medium;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__thumb-size {
+    font-size: $fs-xs;
+    color: $on-surface-variant;
+    margin-top: 2px;
+  }
+
+  // --- Editor-Werkzeugleiste ---
+  &__toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-1;
+    padding: $spacing-2;
+    border: $ghost-border;
+    border-bottom: none;
+    border-radius: $border-radius $border-radius 0 0;
+    background: $surface-container;
+  }
+
+  &__tool {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 32px;
+    height: 32px;
+    padding: 0 $spacing-2;
+    border: none;
+    border-radius: $border-radius-sm;
+    background: transparent;
+    color: $on-surface-variant;
+    font-family: $font-ui;
+    font-size: $fs-sm;
+    font-weight: $fw-semibold;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+      background: $surface;
+      color: $primary;
+    }
+  }
+
+  &__tool-sep {
+    width: 1px;
+    margin: $spacing-1 $spacing-1;
+    background: rgba($outline-variant, 0.4);
+  }
+
+  &__editor {
+    border-radius: 0 0 $border-radius $border-radius;
+    min-height: 340px;
+    font-size: $fs-sm;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    line-height: $lh-relaxed;
+  }
+
+  // --- Aktionen ---
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-3;
+    align-items: center;
+    margin-top: $spacing-8;
+  }
+
+  &__spacer {
+    flex: 1;
+  }
+
+  // --- Statusmeldungen ---
+  &__status {
+    display: none;
+    margin-top: $spacing-5;
+    padding: $spacing-4 $spacing-5;
+    border-radius: $border-radius;
+    font-family: $font-ui;
+    font-size: $fs-sm;
+    line-height: $lh-normal;
+
+    &--visible {
+      display: block;
+    }
+
+    &--busy {
+      background: $surface-container;
+      color: $on-surface-variant;
+    }
+
+    &--error {
+      background: rgba(#B3261E, 0.08);
+      color: #8C1D18;
+    }
+
+    &--ok {
+      background: rgba($primary, 0.07);
+      color: $primary;
+    }
+  }
+
+  &__status-links {
+    margin-top: $spacing-3;
+    font-size: $fs-xs;
+    word-break: break-all;
+
+    a {
+      color: inherit;
+    }
+  }
+
+  // --- Vorschau ---
+  &__preview-label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $spacing-3;
+    font-family: $font-ui;
+    font-size: $fs-xs;
+    font-weight: $fw-semibold;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: $outline;
+    padding-bottom: $spacing-4;
+    margin-bottom: $spacing-6;
+    border-bottom: $ghost-border;
+  }
+
+  &__preview-toggle {
+    font-family: $font-ui;
+    font-size: $fs-xs;
+    font-weight: $fw-semibold;
+    letter-spacing: 0;
+    text-transform: none;
+    padding: $spacing-1 $spacing-3;
+    border: 1px solid rgba($primary, 0.2);
+    border-radius: $border-radius-xl;
+    background: transparent;
+    color: $primary;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+      background: rgba($primary, 0.05);
+    }
+  }
+
+  &__preview-hero {
+    margin: 0 0 $spacing-6;
+
+    img {
+      width: 100%;
+      border-radius: $border-radius;
+      display: block;
+    }
+  }
+
+  &__preview-title {
+    font-family: $font-display;
+    font-size: $fs-2xl;
+    font-weight: $fw-bold;
+    line-height: $lh-tight;
+    margin-bottom: $spacing-3;
+  }
+
+  &__preview-placeholder {
+    color: $outline;
+    font-style: italic;
+  }
+
+  &__preview-meta {
+    font-family: $font-ui;
+    font-size: $fs-sm;
+    color: $on-surface-variant;
+    margin-bottom: $spacing-2;
+  }
+
+  &__preview-desc {
+    color: $on-surface-variant;
+    font-size: $fs-md;
+    line-height: $lh-normal;
+    margin: $spacing-3 0;
+  }
+
+  &__preview-divider {
+    height: 1px;
+    background: rgba($outline-variant, 0.3);
+    margin: $spacing-6 0;
+  }
+
+  // --- Rohes Markdown ---
+  &__raw {
+    display: none;
+    white-space: pre-wrap;
+    word-break: break-word;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: $fs-xs;
+    line-height: $lh-relaxed;
+    color: $on-surface-variant;
+    background: $surface-container;
+    padding: $spacing-5;
+    border-radius: $border-radius;
+    margin: 0;
+
+    &--visible {
+      display: block;
+    }
+  }
+
+  &__hidden {
+    display: none !important;
+  }
+}
+
+// --- Mobil: eine Spalte, Umschalter statt nebeneinander ---
+@media (max-width: $bp-lg) {
+  .submit {
+    &__grid {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0;
+    }
+
+    &__tabs {
+      display: flex;
+    }
+
+    &__preview-pane {
+      position: static;
+      max-height: none;
+      overflow: visible;
+      padding: $spacing-6;
+    }
+
+    &__pane--hidden {
+      display: none;
+    }
+  }
+}

@@ -30,3 +30,22 @@ logo top right. `--dry-run` lists what it would do.
 
 Got a real picture? Drop it into `static/images/` under the name the front matter uses. The
 script never overwrites it: `--force` only rebuilds tiles it made itself.
+
+## Reader submissions (`/einreichen/`)
+
+A form that writes the post for you: guided fields, live preview, then the browser uploads
+the `index.md` and the cover to Cloudinary and opens your mail program with the download
+links. Configured in `[params.submit]` in `hugo.toml`.
+
+The Cloudinary upload preset must be **unsigned**, and its allowed formats must include
+`md` next to the image types — otherwise the cover arrives and the post text does not.
+
+Each mail names its target paths. Submissions come in as `draft: true`:
+
+```
+content/posts/<Titel aus der Mail>/index.md
+static/images/<slug aus der Mail>.jpg
+```
+
+Read it, flip the draft flag, commit. No cover? Drop the `image:` line and let
+`generate-post-images.py` build a tile.
