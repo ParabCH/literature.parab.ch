@@ -5,7 +5,7 @@ publication: "1962"
 recommendation: "Blue Rabbit"
 date: 2026-07-28
 draft: false
-image: "eiland.jpg"
+image: "/images/eiland.jpg"
 featured: true
 description: "Huxleys utopischer Entwurf einer Gesellschaftsform, in der Psychedelika der alltäglichen Normalität angehören"
 categories:
@@ -24,6 +24,3 @@ tags:
 * **Reduktionsventil-Theorie:** Huxleys These, dass das Gehirn Wahrnehmungen filtert und Meskalin diesen Filter öffnet.
 * **Utopie vs. Dystopie:** *Eiland* als positives Gegenstück zu Huxleys *Schöne neue Welt*.
 * **Philosophie des Bewusstseins:** Tiefe Reflexionen über Ästhetik, Zeitgefühl und spirituelles Erleben.
-
-## Wo ist diese Ressource zu finden?
-[Im Buchhandel zu finden](https://www.piper.de/)

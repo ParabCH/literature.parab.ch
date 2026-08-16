@@ -13,7 +13,6 @@ categories:
 tags:
   - Psilocybin
   - Depressionsforschung
-  - NEJM
   - Klinische Studie
 ---
 
