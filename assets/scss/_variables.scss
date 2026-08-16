@@ -3,53 +3,53 @@
 // ===========================================
 
 // --- Palette ---
-$primary:                #570030;
-$primary-light:          #741B47;
-$primary-lighter:        #8E2A5E;
-$on-primary:             #FFFFFF;
+$primary: #570030;
+$primary-light: #741B47;
+$primary-lighter: #8E2A5E;
+$on-primary: #FFFFFF;
 
-$surface:                #F9F9F9;
-$surface-container:      #F2F0F0;
+$surface: #D9F9F9;
+$surface-container: #F2F0F0;
 $surface-container-high: #EAE7E8;
-$surface-dim:            #DDD9DA;
-$on-surface:             #1A1C1C;
-$on-surface-variant:     #44474E;
-$outline:                #74777F;
-$outline-variant:        #C4C6D0;
+$surface-dim: #DDD9DA;
+$on-surface: #1A1C1C;
+$on-surface-variant: #44474E;
+$outline: #74777F;
+$outline-variant: #C4C6D0;
 
 // --- Typography ---
-$font-display:  'Plus Jakarta Sans', sans-serif;
-$font-body:     'Work Sans', sans-serif;
-$font-ui:       'Inter', sans-serif;
+$font-display: 'Plus Jakarta Sans', sans-serif;
+$font-body: 'Work Sans', sans-serif;
+$font-ui: 'Inter', sans-serif;
 
-$fs-xs:   0.75rem;    // 12px
-$fs-sm:   0.875rem;   // 14px
-$fs-base: 1rem;       // 16px
-$fs-md:   1.125rem;   // 18px
-$fs-lg:   1.25rem;    // 20px
-$fs-xl:   1.5rem;     // 24px
-$fs-2xl:  2rem;       // 32px
-$fs-3xl:  2.5rem;     // 40px
-$fs-hero: 3.25rem;    // 52px
+$fs-xs: 0.75rem; // 12px
+$fs-sm: 0.875rem; // 14px
+$fs-base: 1rem; // 16px
+$fs-md: 1.125rem; // 18px
+$fs-lg: 1.25rem; // 20px
+$fs-xl: 1.5rem; // 24px
+$fs-2xl: 2rem; // 32px
+$fs-3xl: 2.5rem; // 40px
+$fs-hero: 3.25rem; // 52px
 
-$fw-regular:  400;
-$fw-medium:   500;
+$fw-regular: 400;
+$fw-medium: 500;
 $fw-semibold: 600;
-$fw-bold:     700;
+$fw-bold: 700;
 
-$lh-tight:    1.2;
-$lh-snug:     1.35;
-$lh-normal:   1.6;
-$lh-relaxed:  1.75;
+$lh-tight: 1.2;
+$lh-snug: 1.35;
+$lh-normal: 1.6;
+$lh-relaxed: 1.75;
 
 // --- Spacing ---
-$spacing-1:  0.25rem;
-$spacing-2:  0.5rem;
-$spacing-3:  0.75rem;
-$spacing-4:  1rem;
-$spacing-5:  1.25rem;
-$spacing-6:  1.5rem;
-$spacing-8:  2rem;
+$spacing-1: 0.25rem;
+$spacing-2: 0.5rem;
+$spacing-3: 0.75rem;
+$spacing-4: 1rem;
+$spacing-5: 1.25rem;
+$spacing-6: 1.5rem;
+$spacing-8: 2rem;
 $spacing-10: 2.5rem;
 $spacing-12: 3rem;
 $spacing-16: 4rem;
@@ -57,18 +57,18 @@ $spacing-20: 5rem;
 $spacing-24: 6rem;
 
 // --- Layout ---
-$max-width:       1200px;
-$content-width:   720px;
-$sidebar-width:   260px;
-$nav-height:      72px;
-$border-radius:   12px;
+$max-width: 1200px;
+$content-width: 720px;
+$sidebar-width: 260px;
+$nav-height: 72px;
+$border-radius: 12px;
 $border-radius-sm: 8px;
 $border-radius-lg: 16px;
 $border-radius-xl: 24px;
 
 // --- Shadows ---
-$shadow-ambient:  0 12px 32px rgba($on-surface, 0.04);
-$shadow-hover:    0 16px 40px rgba($on-surface, 0.07);
+$shadow-ambient: 0 12px 32px rgba($on-surface, 0.04);
+$shadow-hover: 0 16px 40px rgba($on-surface, 0.07);
 $shadow-elevated: 0 4px 16px rgba($on-surface, 0.06);
 
 // --- Ghost borders ---
@@ -78,17 +78,17 @@ $ghost-border: 1px solid rgba($outline-variant, 0.15);
 $gradient-primary: linear-gradient(135deg, $primary, $primary-light);
 
 // --- Transitions ---
-$transition-fast:   150ms ease;
+$transition-fast: 150ms ease;
 $transition-normal: 250ms ease;
-$transition-slow:   400ms ease;
+$transition-slow: 400ms ease;
 
 // --- Breakpoints ---
-$bp-sm:  576px;
-$bp-md:  768px;
-$bp-lg:  1024px;
-$bp-xl:  1280px;
+$bp-sm: 576px;
+$bp-md: 768px;
+$bp-lg: 1024px;
+$bp-xl: 1280px;
 
 // --- Z-index ---
-$z-nav:     100;
-$z-search:  200;
+$z-nav: 100;
+$z-search: 200;
 $z-overlay: 300;
