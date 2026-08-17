@@ -1,4 +1,4 @@
-baseURL = "https://literature.parab.ch/"
+baseURL = "http://literatur.psng.info/"
 languageCode = "de"
 title = "PSNG Literatur Blog"
 [pagination]

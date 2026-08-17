@@ -1,6 +1,6 @@
 # PSNG Literatur Blog
 
-Hugo site for <https://literature.parab.ch/>. Push to `main` and it deploys itself.
+Hugo site for <http://literatur.psng.info/>. Push to `main` and it deploys itself.
 
 ## Run this once after cloning
 

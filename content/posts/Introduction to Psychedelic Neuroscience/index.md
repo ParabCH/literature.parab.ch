@@ -16,6 +16,8 @@ tags:
   - DMN
 ---
 
+ {{< youtube LftC0jVmxuI >}}
+
 ## Warum ist dieser Stream sehenswert?
 Eric gibt uns eine detailiierte und leicht verständliche Einführung in neurobiologische Wirkmechanismen, die aktuell mit Psychedelika in Verbindung gebracht werden.
 
