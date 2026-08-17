@@ -10,7 +10,7 @@ featured: true
 description: "Huxleys utopischer Entwurf einer Gesellschaftsform, in der Psychedelika der alltäglichen Normalität angehören"
 categories:
   - Buch
-tags:‚
+tags:
   - Philosophie
   - Meskalin
   - Utopie
