@@ -1,8 +1,15 @@
 {{ define "main" }}
 <div class="container" style="padding: 4rem 0;">
   <div class="section-header">
-    <h1 class="section-header__title">{{ .Title }}</h1>
-    <p class="section-header__description">
+    <h1 class="section-header__title" style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0;">
+      <span class="chip chip--active" style="font-size: 1.5rem; line-height: 1.2; padding: 0.6rem 1rem;">{{ .Title }}</span>
+      {{ $alternate := dict "Bücher" (dict "title" "Paper" "url" "/categories/paper/") "Paper" (dict "title" "Bücher" "url" "/categories/buch/") "Film" (dict "title" "PSNG-Stream" "url" "/categories/psng-stream/") "PSNG-Stream" (dict "title" "Film" "url" "/categories/film/") }}
+      {{ $current := index $alternate .Title }}
+      {{ if $current }}
+        <a href="{{ $current.url | relURL }}" class="chip" style="font-size: 0.75rem; line-height: 1; padding: 0.45rem 0.8rem;">{{ $current.title }}</a>
+      {{ end }}
+    </h1>
+    <p class="section-header__description" style="margin-top: 1rem;">
       {{ len .Pages }} {{ if eq (len .Pages) 1 }}Beitrag{{ else }}Beiträge{{ end }}
     </p>
   </div>

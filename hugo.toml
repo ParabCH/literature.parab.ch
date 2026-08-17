@@ -52,38 +52,39 @@ title = "PSNG Literatur Blog"
 
 [menus]
   [[menus.main]]
-    name = "Startseite"
+    name = "Blog Startseite"
     url = "/"
     weight = 1
 
   [[menus.main]]
+    name = "PSNG Hauptseite"
+    url = "https://psng.info/"
+    weight = 2
+
+  [[menus.main]]
     name = "Alle Beiträge"
     url = "/posts/"
-    weight = 2
+    weight = 3
 
   [[menus.main]]
     name = "Bücher"
     url = "/categories/buch/"
-    weight = 3
-  [[menus.main]]
-    name = "PSNG Hauptseite"
-    url = "https://psng.info/"
     weight = 4
 
   [[menus.main]]
     name = "Paper"
     url = "/categories/paper/"
-    weight = 4
+    weight = 5
 
   [[menus.main]]
     name = "Podcasts"
     url = "/categories/podcast/"
-    weight = 5
+    weight = 6
 
   [[menus.main]]
     name = "Beitrag einreichen"
     url = "/einreichen/"
-    weight = 6
+    weight = 7
 
 [minify]
   [minify.tdewolff]
