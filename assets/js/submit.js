@@ -1,19 +1,18 @@
-// Beitrag einreichen — Formular, Live-Vorschau, Upload, mailto
+// Beitrag einreichen — Formular, Live-Vorschau, Einreichung ans Backend
 (function () {
   var app = document.getElementById('submit-app');
   if (!app) return;
 
   var CFG = {
-    cloudName: app.dataset.cloudName || '',
-    uploadPreset: app.dataset.uploadPreset || '',
-    folder: app.dataset.folder || '',
+    api: document.body.getAttribute('data-api') || '',
     mailTo: app.dataset.mailTo || '',
-    mailCc: app.dataset.mailCc || '',
     maxImageMB: parseFloat(app.dataset.maxImageMb) || 8
   };
 
-  var UPLOAD_READY = !!(CFG.cloudName && CFG.uploadPreset);
   var STORAGE_KEY = 'psng-einreichung-v1';
+  // Gleicher Schlüssel wie in comments.js und edit.js: einmal eingetippt,
+  // überall vorausgefüllt.
+  var IDENTITY_KEY = 'psng-identity-v1';
 
   var BODY_TEMPLATE = [
     '## Warum ist diese Ressource lesenswert?',
@@ -52,7 +51,7 @@
       .replace(/'/g, '&#39;');
   }
 
-  // Dateiname für static/images/ — ASCII, klein, snake_case.
+  // Dateiname für static/images/ — nur ASCII.
   function asciiSlug(str) {
     var s = String(str)
       .replace(/ä/g, 'ae').replace(/ö/g, 'oe').replace(/ü/g, 'ue')
@@ -339,8 +338,12 @@
   // ===========================================
 
   var saveTimer = null;
+  // Nach dem Absenden wird nichts mehr gesichert, sonst legt der nächste
+  // Tastendruck den eben gelöschten Entwurf wieder an.
+  var submitted = false;
 
   function saveDraft() {
+    if (submitted) return;
     clearTimeout(saveTimer);
     saveTimer = setTimeout(function () {
       try {
@@ -434,82 +437,8 @@
   }
 
   // ===========================================
-  // Upload zu Cloudinary (unsigned)
+  // Herunterladen (Notausgang, falls das Backend nicht erreichbar ist)
   // ===========================================
-
-  function uploadFile(blob, resourceType, filename) {
-    var fd = new FormData();
-    fd.append('file', blob, filename);
-    fd.append('upload_preset', CFG.uploadPreset);
-    if (CFG.folder) fd.append('folder', CFG.folder);
-
-    return fetch('https://api.cloudinary.com/v1_1/' + CFG.cloudName + '/' + resourceType + '/upload', {
-      method: 'POST',
-      body: fd
-    }).then(function (r) {
-      return r.json().then(function (j) {
-        if (!r.ok) {
-          throw new Error((j.error && j.error.message) || ('Upload fehlgeschlagen (HTTP ' + r.status + ')'));
-        }
-        return j.secure_url;
-      });
-    });
-  }
-
-  // ===========================================
-  // E-Mail
-  // ===========================================
-
-  function buildMail(d, links) {
-    var lines = [];
-    lines.push('Neuer Beitragsvorschlag für den PSNG Literatur Blog.');
-    lines.push('');
-    lines.push('Titel:      ' + d.title);
-    lines.push('Kategorie:  ' + d.category);
-    if (d.author) lines.push('Autor/in:   ' + d.author);
-    if (tags.length) lines.push('Tags:       ' + tags.join(', '));
-    lines.push('');
-    lines.push('Eingereicht von: ' + d.senderName + ' <' + d.senderEmail + '>');
-    lines.push('');
-    lines.push('Kurzbeschreibung:');
-    lines.push(d.description.slice(0, 400));
-    lines.push('');
-
-    if (links.markdown || links.image) {
-      lines.push('Dateien (Download):');
-      if (links.markdown) lines.push('  Markdown: ' + links.markdown);
-      if (links.image) lines.push('  Cover:    ' + links.image);
-    } else {
-      lines.push('Dateien: bitte die heruntergeladene .md-Datei manuell anhängen.');
-    }
-    lines.push('');
-
-    lines.push('Zielpfad im Repo:');
-    lines.push('  content/posts/' + d.folder + '/index.md');
-    if (imageFile) lines.push('  static/images/' + d.slug + '.' + imageExt(imageFile));
-    lines.push('');
-
-    if (d.note) {
-      lines.push('Anmerkung der einreichenden Person:');
-      lines.push(d.note.slice(0, 500));
-      lines.push('');
-    }
-
-    lines.push('— gesendet über das Einreichungsformular auf literature.parab.ch');
-
-    return {
-      subject: 'Beitragsvorschlag: ' + d.title,
-      body: lines.join('\n')
-    };
-  }
-
-  function openMail(mail) {
-    var url = 'mailto:' + encodeURIComponent(CFG.mailTo) +
-      '?subject=' + encodeURIComponent(mail.subject) +
-      '&body=' + encodeURIComponent(mail.body);
-    if (CFG.mailCc) url += '&cc=' + encodeURIComponent(CFG.mailCc);
-    window.location.href = url;
-  }
 
   function downloadMarkdown() {
     var d = collect();
@@ -528,6 +457,15 @@
   // Absenden
   // ===========================================
 
+  function mailFallback(intro) {
+    var out = intro + '<br>Du kannst den Beitrag stattdessen als <strong>.md herunterladen</strong>';
+    if (CFG.mailTo) {
+      out += ' und direkt an <a href="mailto:' + escapeHtml(CFG.mailTo) + '">' +
+        escapeHtml(CFG.mailTo) + '</a> schicken';
+    }
+    return out + '.';
+  }
+
   function onSubmit(e) {
     e.preventDefault();
 
@@ -539,63 +477,55 @@
       return;
     }
 
-    if (!CFG.mailTo) {
-      status('error', 'Es ist keine Empfängeradresse hinterlegt. Bitte melde dich direkt bei der Redaktion.');
+    if (!CFG.api) {
+      status('error', mailFallback('Die Einreichung ist gerade nicht angebunden.'));
       return;
     }
 
     var d = collect();
     var btn = el('f-submit');
     btn.disabled = true;
+    status('busy', 'Beitrag wird eingereicht …');
 
-    // Ohne konfigurierten Upload: .md herunterladen und manuell anhängen.
-    if (!UPLOAD_READY) {
-      downloadMarkdown();
-      var mail = buildMail(d, {});
-      openMail(mail);
-      status('ok', 'Dein E-Mail-Programm wurde geöffnet. Die Datei <strong>' +
-        escapeHtml(d.slug) + '.md</strong> liegt in deinen Downloads — bitte häng sie an.');
-      btn.disabled = false;
-      return;
-    }
+    var fd = new FormData();
+    fd.append('title', d.title);
+    fd.append('author', d.author);
+    fd.append('publication', d.publication);
+    fd.append('recommendation', d.recommendation);
+    fd.append('description', d.description);
+    fd.append('category', d.category);
+    fd.append('body', d.body);
+    fd.append('tags', tags.join(', '));
+    fd.append('senderName', d.senderName);
+    fd.append('senderEmail', d.senderEmail);
+    fd.append('note', d.note);
+    fd.append('website', el('f-website') ? el('f-website').value : '');
+    if (imageFile) fd.append('image', imageFile, d.slug + '.' + imageExt(imageFile));
 
-    status('busy', 'Dateien werden hochgeladen…');
-
-    var links = {};
-    var chain = Promise.resolve();
-
-    if (imageFile) {
-      chain = chain.then(function () {
-        return uploadFile(imageFile, 'image', d.slug + '.' + imageExt(imageFile))
-          .then(function (url) { links.image = url; });
+    fetch(CFG.api + '/api/submit', { method: 'POST', body: fd })
+      .then(function (r) {
+        return r.json().catch(function () { return {}; }).then(function (j) {
+          if (!r.ok) throw new Error(j.error || ('HTTP ' + r.status));
+          return j;
+        });
+      })
+      .then(function () {
+        submitted = true;
+        clearTimeout(saveTimer);
+        try {
+          localStorage.removeItem(STORAGE_KEY);
+          localStorage.setItem(IDENTITY_KEY, JSON.stringify({ name: d.senderName, email: d.senderEmail }));
+        } catch (err) { /* egal */ }
+        status('ok', '<strong>Danke!</strong> Dein Beitrag ist bei der Redaktion und wird ' +
+          'vor der Veröffentlichung geprüft. Du kannst die Seite jetzt schliessen.');
+        // Der Knopf bleibt gesperrt: ein zweiter Klick wäre ein zweiter,
+        // identischer Pull Request.
+      })
+      .catch(function (err) {
+        status('error', mailFallback('Die Einreichung hat nicht geklappt: ' +
+          escapeHtml(err.message)));
+        btn.disabled = false;
       });
-    }
-
-    chain.then(function () {
-      var blob = new Blob([buildMarkdown()], { type: 'text/markdown;charset=utf-8' });
-      return uploadFile(blob, 'raw', d.slug + '.md').then(function (url) { links.markdown = url; });
-    }).then(function () {
-      var mail = buildMail(d, links);
-      openMail(mail);
-
-      var fallback = '<div class="submit__status-links">Falls sich kein E-Mail-Programm öffnet, ' +
-        'schick diese Links bitte an <a href="mailto:' + escapeHtml(CFG.mailTo) + '">' +
-        escapeHtml(CFG.mailTo) + '</a>:<br>' +
-        'Markdown: <a href="' + escapeHtml(links.markdown) + '">' + escapeHtml(links.markdown) + '</a>' +
-        (links.image ? '<br>Cover: <a href="' + escapeHtml(links.image) + '">' +
-          escapeHtml(links.image) + '</a>' : '') + '</div>';
-
-      status('ok', '<strong>Fast geschafft.</strong> Dein E-Mail-Programm wurde mit der fertigen ' +
-        'Nachricht geöffnet — die Einreichung zählt erst, wenn du dort auf <em>Senden</em> drückst.' +
-        fallback);
-      btn.disabled = false;
-    }).catch(function (err) {
-      status('error', 'Der Upload hat nicht geklappt: ' + escapeHtml(err.message) +
-        '<br>Du kannst den Beitrag stattdessen als <strong>.md herunterladen</strong> und ' +
-        'direkt an <a href="mailto:' + escapeHtml(CFG.mailTo) + '">' + escapeHtml(CFG.mailTo) +
-        '</a> schicken.');
-      btn.disabled = false;
-    });
   }
 
   // ===========================================
@@ -666,7 +596,6 @@
       replacement = text.split('\n').map(function (l, idx) {
         return (typeof prefix === 'function' ? prefix(idx) : prefix) + l;
       }).join('\n');
-      // Vor einem Block eine Leerzeile sicherstellen.
       if (start > 0 && value[start - 1] !== '\n') replacement = '\n' + replacement;
     }
 
@@ -706,6 +635,13 @@
     el('f-body').value = BODY_TEMPLATE;
   }
 
+  // Wer schon kommentiert oder eingereicht hat, muss sich nicht neu vorstellen.
+  try {
+    var identity = JSON.parse(localStorage.getItem(IDENTITY_KEY)) || {};
+    if (!el('f-sender-name').value && identity.name) el('f-sender-name').value = identity.name;
+    if (!el('f-sender-email').value && identity.email) el('f-sender-email').value = identity.email;
+  } catch (e) { /* egal */ }
+
   var watched = ['f-title', 'f-author', 'f-publication', 'f-recommendation',
     'f-description', 'f-body', 'f-sender-name', 'f-sender-email', 'f-note',
     'f-category-other'];
@@ -721,7 +657,6 @@
     update();
   });
 
-  // Name als Vorbelegung für "Empfehlung von".
   el('f-sender-name').addEventListener('blur', function () {
     var rec = el('f-recommendation');
     if (!rec.value.trim() && this.value.trim()) {
@@ -806,6 +741,24 @@
     if (btn) applyTool(btn.getAttribute('data-md'));
   });
 
+  // --- Vollbild-Vorschau ---
+  function setFullPreview(on) {
+    app.classList.toggle('submit--full-preview', on);
+    el('f-fullscreen').textContent = on ? 'Vollbild schliessen' : 'Vollbild';
+    // Ohne Scrollsperre scrollt die Seite hinter der Vorschau weiter.
+    document.documentElement.style.overflow = on ? 'hidden' : '';
+  }
+
+  el('f-fullscreen').addEventListener('click', function () {
+    setFullPreview(!app.classList.contains('submit--full-preview'));
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && app.classList.contains('submit--full-preview')) {
+      setFullPreview(false);
+    }
+  });
+
   // --- Vorschau / Markdown umschalten ---
   el('f-toggle-raw').addEventListener('click', function () {
     var raw = el('f-raw');
@@ -832,6 +785,9 @@
 
   el('f-reset').addEventListener('click', function () {
     if (!window.confirm('Alle Eingaben verwerfen?')) return;
+    // Zurücksetzen beginnt eine neue Einreichung: Sperre wieder lösen.
+    submitted = false;
+    el('f-submit').disabled = false;
     try { localStorage.removeItem(STORAGE_KEY); } catch (e) { /* egal */ }
     watched.forEach(function (id) { el(id).value = ''; });
     el('f-category').value = '';

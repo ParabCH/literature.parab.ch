@@ -1,9 +1,10 @@
+{{- $api := partialCached "api-base.html" .Site -}}
 <!DOCTYPE html>
 <html lang="{{ .Site.LanguageCode | default "en" }}">
 <head>
   {{- partial "head.html" . -}}
 </head>
-<body>
+<body{{ with $api }} data-api="{{ . }}"{{ end }}>
   <div class="page-bg"></div>
   {{- partial "reading-progress.html" . -}}
   {{- partial "nav.html" . -}}
@@ -22,6 +23,11 @@
   <script src="{{ (resources.Get "js/reading-progress.js" | minify | fingerprint).RelPermalink }}"></script>
   {{- end }}
   <script src="{{ (resources.Get "js/search.js" | minify | fingerprint).RelPermalink }}"></script>
+  {{- with $api }}
+  {{/* Auf jeder Seite, nicht nur im Beitrag: die Listenseiten zeigen zwölf
+       Karten, und die holen ihre Sterne mit einer einzigen Anfrage. */}}
+  <script src="{{ (resources.Get "js/rating.js" | minify | fingerprint).RelPermalink }}"></script>
+  {{- end }}
   {{- block "scripts" . }}{{ end }}
 </body>
 </html>

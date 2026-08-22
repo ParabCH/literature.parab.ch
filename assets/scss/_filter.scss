@@ -1,0 +1,93 @@
+// --- Filter auf der Beitragsübersicht ---
+
+.filter {
+  margin-bottom: $spacing-8;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-4;
+
+  &__row {
+    display: flex;
+    align-items: baseline;
+    gap: $spacing-4;
+  }
+
+  &__label {
+    flex-shrink: 0;
+    min-width: 6.5rem;
+    font-family: $font-ui;
+    font-size: $fs-xs;
+    font-weight: $fw-semibold;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: $outline;
+  }
+
+  // Eingeklappt nur mit Skript: sonst wären die restlichen Themen
+  // unerreichbar.
+  &--js:not(&--expanded) &__overflow {
+    display: none;
+  }
+
+  &__more {
+    border: none;
+    cursor: pointer;
+    color: $primary;
+    background: transparent;
+
+    &:hover {
+      background: $surface-container;
+    }
+  }
+
+  &__status {
+    // display: flex würde sonst das hidden-Attribut schlagen — gleiche
+    // Falle wie bei der Antwortleiste der Kommentare.
+    &[hidden] {
+      display: none;
+    }
+
+    margin: 0;
+    display: flex;
+    align-items: baseline;
+    gap: $spacing-4;
+    font-family: $font-ui;
+    font-size: $fs-sm;
+    color: $on-surface-variant;
+  }
+
+  &__reset {
+    border: none;
+    background: none;
+    padding: 0;
+    font-family: $font-ui;
+    font-size: $fs-sm;
+    color: $primary;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  &__empty {
+    font-family: $font-ui;
+    color: $outline;
+    text-align: center;
+    padding: $spacing-10 0;
+  }
+
+  @media (max-width: $bp-sm) {
+    &__row {
+      flex-direction: column;
+      gap: $spacing-2;
+    }
+  }
+}
+
+.post-grid__cell {
+  // display: contents lässt die Karte selbst Grid-Kind sein; [hidden] auf
+  // contents wirkt nicht überall, darum explizit.
+  display: contents;
+
+  &[hidden] .post-card {
+    display: none;
+  }
+}

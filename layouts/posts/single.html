@@ -1,4 +1,8 @@
 {{ define "main" }}
+{{/* Ohne konfiguriertes Backend erscheinen die interaktiven Teile gar nicht
+     erst. Ein Formular, an dem kein Skript hängt, würde beim Absenden nativ
+     per GET neu laden — mit Name, E-Mail und Text in der Adresszeile. */}}
+{{- $api := partialCached "api-base.html" .Site -}}
 <article class="container">
   <div class="post-layout{{ if .TableOfContents }} post-layout--with-toc{{ end }}">
     <header style="margin-bottom: 2rem;">
@@ -9,6 +13,12 @@
       <strong>Autor/in:</strong> {{ . }} 
       </p>
       {{ end }}
+      {{ with $api }}
+      <div style="margin-top: 0.75rem;">
+        {{ partial "rating-summary.html" (dict "uri" $.RelPermalink) }}
+      </div>
+      {{ end }}
+
       {{ with .Description }}
       <p class="text-muted" style="font-size: 1.125rem; margin-top: 0.75rem;">{{ . }}</p>
       {{ end }}
@@ -33,7 +43,20 @@
       {{ .Content }}
     </div>
 
+    {{ with $api }}
+    {{ partial "rating-input.html" $ }}
+    {{ partial "edit-proposal.html" $ }}
+    {{ partial "comments.html" $ }}
+    {{ end }}
+
     {{ partial "related-posts.html" . }}
   </div>
 </article>
+{{ end }}
+
+{{ define "scripts" }}
+{{- with partialCached "api-base.html" .Site }}
+<script src="{{ (resources.Get "js/comments.js" | minify | fingerprint).RelPermalink }}"></script>
+<script src="{{ (resources.Get "js/edit.js" | minify | fingerprint).RelPermalink }}"></script>
+{{- end }}
 {{ end }}

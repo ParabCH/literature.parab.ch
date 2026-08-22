@@ -5,6 +5,12 @@
 .submit {
   padding: $spacing-12 0 $spacing-16;
 
+  // Formular und Vorschau nebeneinander brauchen mehr als die Lesebreite,
+  // sonst wird das Formular zur schmalen Spalte.
+  &.container {
+    max-width: 1400px;
+  }
+
   &__header {
     max-width: $content-width;
     margin: 0 auto $spacing-10;
@@ -23,9 +29,11 @@
   }
 
   // --- Zweispaltiges Layout: Formular | Vorschau ---
+  // Das Formular bekommt den grösseren Teil: es trägt die Eingabefelder,
+  // die Vorschau ist nur Ansicht.
   &__grid {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
     gap: $spacing-10;
     align-items: start;
   }
@@ -40,6 +48,39 @@
     border-radius: $border-radius-lg;
     box-shadow: $shadow-ambient;
     padding: $spacing-8;
+  }
+
+  // --- Vollbild-Vorschau: die Vorschau legt sich über die ganze Seite und
+  // zentriert den Inhalt auf Lesebreite, wie im fertigen Beitrag. ---
+  &--full-preview {
+    .submit__preview-pane {
+      position: fixed;
+      inset: 0;
+      z-index: $z-search;
+      max-width: none;
+      max-height: none;
+      margin: 0;
+      overflow-y: auto;
+      border-radius: 0;
+      padding: $spacing-8 $spacing-8 $spacing-16;
+
+      // Inhalt auf Lesebreite zentrieren, wie im fertigen Beitrag.
+      > * {
+        max-width: $content-width;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+
+    // Schlägt auch den Umschalter-Zustand, der die Vorschau versteckt.
+    .submit__preview-pane.submit__pane--hidden {
+      display: block;
+    }
+  }
+
+  &__preview-actions {
+    display: flex;
+    gap: $spacing-4;
   }
 
   // --- Umschalter (nur mobil sichtbar) ---
@@ -520,8 +561,9 @@
   }
 }
 
-// --- Mobil: eine Spalte, Umschalter statt nebeneinander ---
-@media (max-width: $bp-lg) {
+// --- Eine Spalte mit Umschalter: unterhalb von 1280px ist nebeneinander
+// zu eng, das Formular braucht die volle Breite. ---
+@media (max-width: $bp-xl) {
   .submit {
     &__grid {
       grid-template-columns: minmax(0, 1fr);
@@ -530,6 +572,16 @@
 
     &__tabs {
       display: flex;
+    }
+
+    // Einspaltig deckelt eine Lesebreite die Panes, sonst laufen die Felder
+    // über die ganze Containerbreite.
+    &__tabs,
+    &__form,
+    &__preview-pane {
+      max-width: 860px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     &__preview-pane {

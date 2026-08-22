@@ -1,0 +1,46 @@
+{{/* Den Thread lädt assets/js/comments.js nach. Ohne Backend oder ohne
+     JavaScript bleibt hier nichts Kaputtes stehen. */}}
+<section class="comments" id="comments" data-uri="{{ .RelPermalink }}">
+  <h2 class="comments__title">
+    Kommentare <span class="comments__count" data-comments-count></span>
+  </h2>
+
+  <div class="comments__list" data-comments-list></div>
+
+  <form class="comments__form" data-comments-form novalidate>
+    <p class="comments__reply-bar" data-reply-bar hidden>
+      Antwort an <strong data-reply-to></strong>
+      <button type="button" class="comments__reply-cancel" data-reply-cancel>abbrechen</button>
+    </p>
+
+    <div class="comments__row">
+      <label class="comments__label" for="comment-author">Name</label>
+      <input class="input" id="comment-author" name="author" maxlength="60" autocomplete="name" required>
+    </div>
+
+    <div class="comments__row">
+      <label class="comments__label" for="comment-email">
+        E-Mail <span class="comments__hint">optional, wird nicht veröffentlicht</span>
+      </label>
+      <input class="input" id="comment-email" name="email" type="email" maxlength="200" autocomplete="email">
+    </div>
+
+    <div class="comments__row">
+      <label class="comments__label" for="comment-body">Kommentar</label>
+      <textarea class="input comments__textarea" id="comment-body" name="body" rows="5" maxlength="4000" required></textarea>
+      <p class="comments__hint">Klartext. Links werden automatisch erkannt.</p>
+    </div>
+
+    {{/* Honigtopf: für Menschen unsichtbar, für Formularroboter verlockend.
+         Ein ausgefülltes Feld wird stillschweigend verworfen. */}}
+    <div class="comments__trap" aria-hidden="true">
+      <label for="comment-website">Website</label>
+      <input id="comment-website" name="website" type="text" tabindex="-1" autocomplete="off">
+    </div>
+
+    <div class="comments__actions">
+      <button class="btn btn--primary" type="submit">Kommentar senden</button>
+      <p class="comments__status" data-comments-status role="status"></p>
+    </div>
+  </form>
+</section>

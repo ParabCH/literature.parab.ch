@@ -1,0 +1,52 @@
+{{/* Beim Aufklappen holt assets/js/edit.js den aktuellen Text vom Backend
+     und reicht den Vorschlag als Pull Request ein. Ohne Backend bleibt der
+     Bereich funktionslos, aber nicht kaputt. */}}
+<section class="edit" id="edit-proposal" data-uri="{{ .RelPermalink }}">
+  <details class="edit__details" data-edit-details>
+    <summary class="edit__summary">Fehler gefunden? Änderung vorschlagen</summary>
+
+    <form class="comments__form edit__form" data-edit-form novalidate>
+      <p class="comments__hint">
+        Du bearbeitest den Fliesstext des Beitrags. Die Redaktion prüft jeden
+        Vorschlag, bevor er erscheint.
+      </p>
+
+      <div class="comments__row">
+        <label class="comments__label" for="edit-body">Text des Beitrags</label>
+        <textarea class="input comments__textarea edit__textarea" id="edit-body"
+                  name="body" rows="16" disabled></textarea>
+        <p class="comments__hint">Markdown, so wie der Beitrag geschrieben ist.</p>
+      </div>
+
+      <div class="comments__row">
+        <label class="comments__label" for="edit-author">Name</label>
+        <input class="input" id="edit-author" name="author" maxlength="60" autocomplete="name" required>
+      </div>
+
+      <div class="comments__row">
+        <label class="comments__label" for="edit-email">
+          E-Mail <span class="comments__hint">optional, für Rückfragen, wird nicht veröffentlicht</span>
+        </label>
+        <input class="input" id="edit-email" name="email" type="email" maxlength="200" autocomplete="email">
+      </div>
+
+      <div class="comments__row">
+        <label class="comments__label" for="edit-note">
+          Anmerkung <span class="comments__hint">optional, was und warum du geändert hast</span>
+        </label>
+        <textarea class="input" id="edit-note" name="note" rows="2" maxlength="1000"></textarea>
+      </div>
+
+      {{/* Honigtopf, gleiches Prinzip wie im Kommentarformular. */}}
+      <div class="comments__trap" aria-hidden="true">
+        <label for="edit-website">Website</label>
+        <input id="edit-website" name="website" type="text" tabindex="-1" autocomplete="off">
+      </div>
+
+      <div class="comments__actions">
+        <button class="btn btn--primary" type="submit">Vorschlag einreichen</button>
+        <p class="comments__status" data-edit-status role="status"></p>
+      </div>
+    </form>
+  </details>
+</section>

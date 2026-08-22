@@ -1,0 +1,222 @@
+// --- Kommentare ---
+
+.comments {
+  margin-top: $spacing-16;
+  padding-top: $spacing-10;
+  border-top: $ghost-border;
+
+  &__title {
+    font-family: $font-display;
+    font-size: $fs-xl;
+    font-weight: $fw-semibold;
+    color: $on-surface;
+    margin-bottom: $spacing-6;
+  }
+
+  &__count {
+    color: $outline;
+    font-weight: $fw-regular;
+  }
+
+  &__empty {
+    font-family: $font-ui;
+    font-size: $fs-sm;
+    color: $outline;
+    margin-bottom: $spacing-6;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-5;
+    margin-bottom: $spacing-10;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-4;
+    padding: $spacing-6;
+    border: $ghost-border;
+    border-radius: $border-radius;
+    background: $surface-container;
+
+    &.is-busy {
+      opacity: 0.6;
+      pointer-events: none;
+    }
+  }
+
+  &__row {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-2;
+  }
+
+  &__label {
+    font-family: $font-ui;
+    font-size: $fs-sm;
+    font-weight: $fw-medium;
+    color: $on-surface;
+  }
+
+  &__hint {
+    font-family: $font-ui;
+    font-size: $fs-xs;
+    font-weight: $fw-regular;
+    color: $outline;
+    margin: 0;
+  }
+
+  &__textarea {
+    resize: vertical;
+    min-height: 7rem;
+    font-family: $font-body;
+    line-height: $lh-normal;
+  }
+
+  &__reply-bar {
+    // display: flex schlägt sonst das hidden-Attribut, und "Antwort an"
+    // stünde dauerhaft über dem Formular.
+    &[hidden] {
+      display: none;
+    }
+
+    display: flex;
+    align-items: center;
+    gap: $spacing-2;
+    margin: 0;
+    padding: $spacing-2 $spacing-4;
+    border-radius: $border-radius-sm;
+    background: rgba($primary, 0.06);
+    font-family: $font-ui;
+    font-size: $fs-sm;
+    color: $on-surface-variant;
+  }
+
+  &__reply-cancel {
+    border: none;
+    background: none;
+    padding: 0;
+    font-family: $font-ui;
+    font-size: $fs-sm;
+    color: $primary;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: $spacing-4;
+    flex-wrap: wrap;
+  }
+
+  &__status {
+    margin: 0;
+    font-family: $font-ui;
+    font-size: $fs-sm;
+    color: $on-surface-variant;
+
+    &--ok {
+      color: $primary;
+    }
+
+    &--error {
+      color: #B3261E;
+    }
+  }
+
+  // Der Honigtopf. aria-hidden allein reicht nicht: das Feld darf auch für
+  // sehende Menschen nicht erreichbar sein.
+  &__trap {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+}
+
+.comment {
+  padding: $spacing-5;
+  border: $ghost-border;
+  border-radius: $border-radius;
+  background: $surface-container;
+
+  &__head {
+    display: flex;
+    align-items: baseline;
+    gap: $spacing-3;
+    flex-wrap: wrap;
+    margin-bottom: $spacing-3;
+  }
+
+  &__author {
+    font-family: $font-ui;
+    font-size: $fs-sm;
+    font-weight: $fw-semibold;
+    color: $on-surface;
+  }
+
+  &__time {
+    font-family: $font-ui;
+    font-size: $fs-xs;
+    color: $outline;
+  }
+
+  &__body {
+    font-family: $font-body;
+    font-size: $fs-base;
+    line-height: $lh-normal;
+    color: $on-surface;
+
+    p {
+      margin: 0 0 $spacing-3;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    a {
+      color: $primary;
+      overflow-wrap: anywhere;
+    }
+  }
+
+  &__reply {
+    margin-top: $spacing-3;
+    padding: 0;
+    border: none;
+    background: none;
+    font-family: $font-ui;
+    font-size: $fs-xs;
+    font-weight: $fw-medium;
+    color: $primary;
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  // Antworten gehen genau eine Ebene tief. Alles darunter hängt der Server an
+  // denselben Wurzelkommentar.
+  &__replies {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-4;
+    margin-top: $spacing-4;
+    padding-left: $spacing-5;
+    border-left: 2px solid rgba($primary, 0.15);
+
+    &:empty {
+      display: none;
+    }
+  }
+
+  .comment {
+    background: $surface;
+  }
+}

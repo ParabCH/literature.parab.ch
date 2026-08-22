@@ -1,0 +1,164 @@
+// --- Bewertungen ---
+//
+// Die Sterne sind zwei übereinanderliegende Reihen: eine graue und eine farbige,
+// die auf den Durchschnitt beschnitten wird. So sind auch halbe Sterne möglich,
+// ohne ein einziges Bild.
+
+.rating-stars {
+  position: relative;
+  display: inline-block;
+  white-space: nowrap;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  color: rgba($outline-variant, 0.9);
+
+  &::before {
+    content: '\2605\2605\2605\2605\2605';
+  }
+
+  &__fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    overflow: hidden;
+    color: $primary-light;
+    transition: width $transition-normal;
+
+    &::before {
+      content: '\2605\2605\2605\2605\2605';
+    }
+  }
+}
+
+.rating-summary {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-2;
+  font-family: $font-ui;
+  font-size: $fs-sm;
+  color: $on-surface-variant;
+  // Platz steht schon vor der Antwort des Servers, sonst springt die Überschrift.
+  min-height: 1.5rem;
+  opacity: 0;
+  transition: opacity $transition-normal;
+
+  &.is-loaded {
+    opacity: 1;
+  }
+
+  &.is-offline {
+    display: none;
+  }
+
+  &.is-empty &__text {
+    color: $outline;
+  }
+
+  // Auf Karten ohne Bewertung lieber gar nichts, sonst steht auf zwölf
+  // Kacheln zwölfmal dasselbe.
+  &--sm {
+    font-size: $fs-xs;
+
+    .rating-stars {
+      font-size: $fs-sm;
+    }
+
+    &.is-empty {
+      display: none;
+    }
+  }
+}
+
+.rating-input {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: $spacing-3;
+  margin: $spacing-10 0 0;
+  padding: $spacing-5 $spacing-6;
+  border: $ghost-border;
+  border-radius: $border-radius;
+  background: $surface-container;
+
+  &.is-offline {
+    display: none;
+  }
+
+  &.is-busy {
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
+  &__legend {
+    padding: 0;
+    font-family: $font-ui;
+    font-size: $fs-sm;
+    font-weight: $fw-semibold;
+    color: $on-surface;
+  }
+
+  // Umgedreht, damit der Geschwisterselektor weiter unten die Sterne links vom
+  // gewählten erreicht. Sichtbar stehen sie dadurch wieder von eins bis fünf.
+  &__stars {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+  }
+
+  &__radio {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  &__star {
+    padding: 0 0.05em;
+    font-size: $fs-2xl;
+    line-height: 1;
+    color: rgba($outline-variant, 0.9);
+    cursor: pointer;
+    transition: color $transition-fast, transform $transition-fast;
+  }
+
+  &__radio:checked ~ &__star {
+    color: $primary-light;
+  }
+
+  // Solange der Zeiger über der Reihe steht, zeigt sie den Zeiger und nicht die
+  // gespeicherte Wahl.
+  &__stars:hover &__star {
+    color: rgba($outline-variant, 0.9);
+  }
+
+  &__star:hover,
+  &__star:hover ~ &__star {
+    color: $primary;
+    transform: scale(1.06);
+  }
+
+  &__radio:focus-visible + &__star {
+    outline: 2px solid rgba($primary, 0.5);
+    outline-offset: 2px;
+    border-radius: $border-radius-sm;
+  }
+
+  &__status {
+    margin: 0;
+    min-height: 1rem;
+    font-family: $font-ui;
+    font-size: $fs-xs;
+    color: $on-surface-variant;
+
+    &--error {
+      color: #B3261E;
+    }
+  }
+}

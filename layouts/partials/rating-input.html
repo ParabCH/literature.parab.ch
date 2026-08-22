@@ -1,0 +1,23 @@
+{{/* Echte Radiobuttons, absteigend im Markup: per row-reverse stehen die
+     Sterne sichtbar trotzdem von eins bis fünf, und der Geschwisterselektor
+     im CSS färbt alle Sterne bis zum gewählten. Tastatur und Screenreader
+     funktionieren so ohne JavaScript. */}}
+<fieldset class="rating-input" data-rating-input data-rating-uri="{{ .RelPermalink }}">
+  <legend class="rating-input__legend">Wie hilfreich war diese Ressource?</legend>
+
+  <div class="rating-input__stars">
+    {{- range $stars := seq 5 1 }}
+    <input class="rating-input__radio"
+           type="radio"
+           name="rating"
+           id="rating-{{ $stars }}"
+           value="{{ $stars }}">
+    <label class="rating-input__star" for="rating-{{ $stars }}">
+      <span class="sr-only">{{ $stars }} von 5 Sternen</span>
+      <span aria-hidden="true">&#9733;</span>
+    </label>
+    {{- end }}
+  </div>
+
+  <p class="rating-input__status" data-rating-status role="status"></p>
+</fieldset>
