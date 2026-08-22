@@ -44,7 +44,7 @@
     max-height: calc(100vh - #{$nav-height} - #{$spacing-8});
     overflow-y: auto;
     background: $surface;
-    border: $ghost-border;
+    border: $card-border;
     border-radius: $border-radius-lg;
     box-shadow: $shadow-ambient;
     padding: $spacing-8;
@@ -116,7 +116,7 @@
   // --- Formularabschnitte ---
   &__section {
     background: $surface;
-    border: $ghost-border;
+    border: $card-border;
     border-radius: $border-radius-lg;
     padding: $spacing-6;
     margin-bottom: $spacing-6;

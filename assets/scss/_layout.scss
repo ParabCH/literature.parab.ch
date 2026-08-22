@@ -90,6 +90,7 @@
 // --- Post hero image (single) ---
 .post-hero {
   margin: 0 0 $spacing-10;
+  border: $card-border;
   border-radius: $border-radius-lg;
   overflow: hidden;
   background: $surface-container;

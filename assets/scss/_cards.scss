@@ -1,14 +1,16 @@
 .post-card {
   background: $surface-container;
+  border: $card-border;
   border-radius: $border-radius-lg;
   padding: $spacing-8;
-  transition: background $transition-normal, box-shadow $transition-normal, transform $transition-normal;
+  transition: background $transition-normal, border-color $transition-normal, box-shadow $transition-normal, transform $transition-normal;
   cursor: pointer;
   display: flex;
   flex-direction: column;
 
   &:hover {
     background: $surface-container-high;
+    border-color: rgba($outline, 0.28);
     box-shadow: $shadow-hover;
     transform: translateY(-2px);
   }
