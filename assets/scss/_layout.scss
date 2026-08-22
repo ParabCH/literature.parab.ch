@@ -14,7 +14,7 @@
 .page-bg {
   position: fixed;
   inset: 0;
-  background-image: url('../images/background.png');
+  background-image: url('../images/PSNG-Background.png');
   background-size: cover;
   background-position: center;
   background-color: $surface;
@@ -105,6 +105,17 @@
     height: auto;
     max-height: 520px;
     object-fit: cover;
+  }
+}
+
+.post-video {
+  aspect-ratio: 16 / 9;
+
+  iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
   }
 }
 

@@ -31,10 +31,22 @@
       {{ end }}
     </header>
 
-    {{ with partial "post-image.html" . }}
-    <figure class="post-hero">
-      <img src="{{ . }}" alt="{{ $.Title }}" loading="lazy" decoding="async">
-    </figure>
+    {{ $isStream := in .Params.categories "PSNG-Stream" }}
+    {{ if and $isStream .Params.youtube }}
+    <div class="post-hero post-video">
+      <iframe
+        src="https://www.youtube-nocookie.com/embed/{{ .Params.youtube }}"
+        title="{{ .Title }}"
+        loading="lazy"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen></iframe>
+    </div>
+    {{ else }}
+      {{ with partial "post-image.html" . }}
+      <figure class="post-hero">
+        <img src="{{ . }}" alt="{{ $.Title }}" loading="lazy" decoding="async">
+      </figure>
+      {{ end }}
     {{ end }}
 
     {{ partial "toc.html" . }}
