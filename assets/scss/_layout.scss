@@ -35,8 +35,11 @@
     font-size: $fs-hero;
     font-family: $font-display;
     font-weight: $fw-bold;
-    line-height: $lh-tight;
+    line-height: 1.25;
     margin-bottom: $spacing-6;
+    display: inline-block;
+    padding-bottom: 0.12em;
+    overflow: visible;
     background: $gradient-primary;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
