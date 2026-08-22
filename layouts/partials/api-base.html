@@ -1,0 +1,7 @@
+{{/* Liefert die Backend-Adresse für Bewertungen, Kommentare und Vorschläge.
+     Erwartet .Site. Ein leerer Rückgabewert heisst: Backend aus, die
+     Aufrufer rendern nichts. */}}
+{{- $c := .Params.comments | default dict -}}
+{{- $api := $c.apiBase | default "" -}}
+{{- if not hugo.IsProduction }}{{ $api = $c.devApiBase | default $api }}{{ end -}}
+{{- return $api -}}

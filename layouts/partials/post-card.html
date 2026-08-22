@@ -16,6 +16,11 @@
     <div>
       <div class="post-card__meta">
         <time>{{ .page.Date.Format "2. Jan. 2006" }}</time>
+        {{/* Nur mit Backend: sonst bliebe auf jeder Karte ein leeres,
+             unsichtbares Sterne-Gerüst zurück. */}}
+        {{- with partialCached "api-base.html" .page.Site }}
+        {{ partial "rating-summary.html" (dict "uri" $.page.RelPermalink "size" "sm") }}
+        {{- end }}
       </div>
       <h3 class="post-card__title">{{ .page.Title }}</h3>
       <p class="post-card__excerpt">{{ .page.Summary | plainify | truncate 160 }}</p>

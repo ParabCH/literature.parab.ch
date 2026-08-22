@@ -21,15 +21,18 @@ title = "PSNG Literatur Blog"
   github = ""
   twitter = ""
 
-# Einreichungsformular unter /einreichen/.
-# cloudName + uploadPreset leer lassen = kein Upload; das Formular laedt die
-# .md dann lokal herunter und bittet um manuelles Anhaengen.
+# Backend für Bewertungen, Kommentare, Änderungsvorschläge und Einreichungen
+# (literatur-backend). apiBase gilt für die veröffentlichte Seite, devApiBase
+# für `hugo server`. Beide leer = die Funktionen laden nicht, die Seite bleibt
+# wie vorher.
+[params.comments]
+  apiBase = "https://comments.grey.quest"
+  devApiBase = "http://127.0.0.1:8080"
+
+# Einreichungsformular unter /einreichen/. Es reicht über das Backend oben
+# ein. mailTo ist nur der Notausgang, falls das Backend nicht erreichbar ist.
 [params.submit]
-  cloudName = "snxstp2a"
-  uploadPreset = "psng-literature-submissions"
-  folder = "submissions"
   mailTo = "psngblog@gmail.com"
-  mailCc = ""
   maxImageMB = 8
 
 [markup]

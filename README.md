@@ -31,21 +31,24 @@ logo top right. `--dry-run` lists what it would do.
 Got a real picture? Drop it into `static/images/` under the name the front matter uses. The
 script never overwrites it: `--force` only rebuilds tiles it made itself.
 
-## Reader submissions (`/einreichen/`)
+## Ratings, comments, edit proposals, submissions
 
-A form that writes the post for you: guided fields, live preview, then the browser uploads
-the `index.md` and the cover to Cloudinary and opens your mail program with the download
-links. Configured in `[params.submit]` in `hugo.toml`.
+All four talk to [literatur-backend](../literatur-backend), a small Go service. The blog
+side is configured in `[params.comments]` in `hugo.toml`: `apiBase` for the published
+site, `devApiBase` for `hugo server`. Both empty = none of it loads and the site behaves
+as before. The scripts in `assets/js/` (`rating.js`, `comments.js`, `edit.js`) are
+vendored from the backend repo with `make vendor` over there — edit them there, not here.
 
-The Cloudinary upload preset must be **unsigned**, and its allowed formats must include
-`md` next to the image types — otherwise the cover arrives and the post text does not.
-
-Each mail names its target paths. Submissions come in as `draft: true`:
+Ratings and comments live in the backend's SQLite database. Edit proposals and reader
+submissions (`/einreichen/`) arrive as pull requests on this repo, one commit each,
+posts as `draft: true`:
 
 ```
-content/posts/<Titel aus der Mail>/index.md
-static/images/<slug aus der Mail>.jpg
+content/posts/<Titel>/index.md
+static/images/<slug>.jpg
 ```
 
-Read it, flip the draft flag, commit. No cover? Drop the `image:` line and let
-`generate-post-images.py` build a tile.
+Read the PR, flip the draft flag, merge. No cover? Drop the `image:` line and let
+`generate-post-images.py` build a tile. If the backend is unreachable, the submission
+form falls back to downloading the `.md` and asking the sender to mail it to
+`[params.submit].mailTo`.

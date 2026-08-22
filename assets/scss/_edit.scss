@@ -1,0 +1,30 @@
+// --- Änderung vorschlagen ---
+// Das Formular leiht sich die comments__*-Klassen. Hier steht nur, was am
+// <details>-Rahmen eigen ist.
+
+.edit {
+  margin-top: $spacing-10;
+
+  &__summary {
+    display: inline-block;
+    font-family: $font-ui;
+    font-size: $fs-sm;
+    font-weight: $fw-medium;
+    color: $primary;
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__form {
+    margin-top: $spacing-4;
+  }
+
+  &__textarea {
+    min-height: 16rem;
+    font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, monospace;
+    font-size: $fs-sm;
+  }
+}

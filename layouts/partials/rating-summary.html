@@ -1,0 +1,17 @@
+{{/* Sternanzeige, nur lesend. Aufruf:
+
+       {{ partial "rating-summary.html" (dict "uri" .RelPermalink) }}
+       {{ partial "rating-summary.html" (dict "uri" .RelPermalink "size" "sm") }}
+
+     Die Zahlen holt assets/js/rating.js nach. Ohne Backend bleibt der Block
+     leer. Ohne JavaScript wird er gar nicht erst sichtbar. */}}
+{{- $uri := .uri -}}
+{{- $small := eq (.size | default "") "sm" -}}
+<div class="rating-summary{{ if $small }} rating-summary--sm{{ end }}"
+     data-rating-summary
+     data-rating-uri="{{ $uri }}"
+     role="img"
+     aria-label="Bewertung wird geladen">
+  <span class="rating-stars" aria-hidden="true"><span class="rating-stars__fill"></span></span>
+  <span class="rating-summary__text" data-rating-text></span>
+</div>

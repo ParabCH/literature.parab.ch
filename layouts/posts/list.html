@@ -7,22 +7,69 @@
     {{ end }}
   </div>
 
-  {{/* Themen-Chips */}}
+  {{/* Filter: Kategorien und Themen sind Mehrfachauswahl, assets/js/filter.js
+       blendet die Karten unten passend aus. Ohne JavaScript bleiben die Chips
+       Links auf die Taxonomie-Seiten und alle Karten sichtbar. Der Abgleich
+       läuft beidseitig über urlize, damit Umlaute und Leerzeichen keine
+       zwei Schreibweisen erzeugen. */}}
+  {{ $cats := .Site.Taxonomies.categories }}
   {{ $tags := .Site.Taxonomies.tags }}
-  {{ if gt (len $tags) 0 }}
-  <div class="chip-group" style="margin-bottom: 2rem;">
-    {{- range $name, $pages := $tags }}
-    <a href="{{ "tags/" | relURL }}{{ $name | urlize }}/" class="chip">{{ $name }}</a>
+  {{ $preview := 12 }}
+  <div class="filter" data-filter>
+    {{ if gt (len $cats) 0 }}
+    <div class="filter__row">
+      <span class="filter__label">Kategorien</span>
+      <div class="chip-group">
+        {{- range $cats.ByCount }}
+        <a href="{{ "categories/" | relURL }}{{ .Name | urlize }}/" class="chip"
+           data-filter-cat="{{ .Name | urlize }}">{{ .Page.Title }}<span class="chip__count">{{ .Count }}</span></a>
+        {{- end }}
+      </div>
+    </div>
+    {{ end }}
+
+    {{ if gt (len $tags) 0 }}
+    <div class="filter__row">
+      <span class="filter__label">Themen</span>
+      <div class="chip-group">
+        {{- range $i, $t := $tags.ByCount }}
+        <a href="{{ "tags/" | relURL }}{{ $t.Name | urlize }}/"
+           class="chip{{ if ge $i $preview }} filter__overflow{{ end }}"
+           data-filter-tag="{{ $t.Name | urlize }}">{{ $t.Page.Title }}</a>
+        {{- end }}
+        {{ if gt (len $tags) $preview }}
+        <button type="button" class="chip filter__more" data-filter-more hidden
+                data-more-label="+{{ sub (len $tags) $preview }} weitere"
+                data-less-label="weniger anzeigen">+{{ sub (len $tags) $preview }} weitere</button>
+        {{ end }}
+      </div>
+    </div>
+    {{ end }}
+
+    <p class="filter__status" data-filter-status hidden>
+      <span data-filter-count></span>
+      <button type="button" class="filter__reset" data-filter-reset>Filter zurücksetzen</button>
+    </p>
+  </div>
+
+  {{/* Alle Beiträge in einem Rutsch: die Filterung passiert im Browser, und
+       eine Seitengrenze mitten in der Auswahl würde Treffer verstecken. */}}
+  <div class="post-grid" data-filter-grid>
+    {{- range .Pages.ByDate.Reverse }}
+    {{- $pc := slice }}{{ range .Params.categories }}{{ $pc = $pc | append (. | urlize) }}{{ end }}
+    {{- $pt := slice }}{{ range .Params.tags }}{{ $pt = $pt | append (. | urlize) }}{{ end }}
+    <div class="post-grid__cell" data-cats="{{ delimit $pc " " }}" data-tags="{{ delimit $pt " " }}">
+      {{ partial "post-card.html" (dict "page" . "featured" false) }}
+    </div>
     {{- end }}
   </div>
-  {{ end }}
 
-  <div class="post-grid">
-    {{- range (.Paginate .Pages.ByDate.Reverse).Pages }}
-    {{ partial "post-card.html" (dict "page" . "featured" false) }}
-    {{- end }}
-  </div>
-
-  {{ partial "pagination.html" . }}
+  <p class="filter__empty" data-filter-empty hidden>
+    Keine Beiträge passen zu dieser Auswahl.
+  </p>
 </div>
+{{ end }}
+
+{{ define "scripts" }}
+<script src="{{ (resources.Get "js/filter.js" | minify | fingerprint).RelPermalink }}"></script>
 {{ end }}

@@ -2,6 +2,10 @@
   {
     "title": {{ $page.Title | jsonify }},
     "permalink": {{ $page.RelPermalink | jsonify }},
+    {{/* Der Backend-Dienst braucht den Quellpfad, um zu einer URL die Datei
+         zu finden. Aus dem Permalink allein ist der Ordnername nicht
+         ableitbar, weil Hugo Umlaute und Leerzeichen wegslugifiziert. */}}
+    "file": {{ with $page.File }}{{ printf "content/%s" .Path | jsonify }}{{ else }}""{{ end }},
     "author": {{ $page.Params.resource_author | default "" | jsonify }},
     "summary": {{ $page.Summary | plainify | jsonify }},
     "content": {{ $page.Plain | jsonify }}
