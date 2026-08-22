@@ -17,10 +17,14 @@ tags:
   - Kritisch
 ---
 
-## Warum ist dieser Film sehenswert?
+## Warum ist dieser Film sehenswert? - Teständerung
 5-MeO-DMT unterscheidet sich drastisch von Klassikern wie Psilocybin oder LSD. Dieses Werk/Thema beleuchtet sowohl das enorme Heilungspotenzial (Non-Dualität) als auch die enormen Gefahren von Re-Traumatisierungen.
 
 ## Was du in diesem Film findest
 * **Non-Dualität:** Die Erfahrung von absolutem Leerraum/Licht und vollständiger Ich-Auflösung.
 * **Harm Reduction & Risiken:** Warum 5-MeO-DMT absolut erfahrene Begleitung braucht und Re-Reaktivationen ("Re-Trips") auslösen kann.
 * **Ethik der Bufo-Gewinnung:** Die Problematik rund um das Sekret der Inkagröte (Bufo alvarius) vs. synthesebasiertes 5-MeO.
+ 
+
+
+**Nur ein Test**
