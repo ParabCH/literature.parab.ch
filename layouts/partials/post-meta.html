@@ -1,9 +1,11 @@
 <div class="post-meta font-ui text-sm text-muted">
   <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2. January 2006" }}</time>
   {{- with .Params.categories }}
+  {{ $pluralLabels := dict "Buch" "Bücher" "Bücher" "Bücher" "Film" "Filme" "Filme" "Filme" "Podcast" "Podcasts" "Podcasts" "Podcasts" "Paper" "Paper" "Artikel" "Artikel" "Youtube" "YouTube" "YouTube" "YouTube" "PSNG-Stream" "PSNG-Streams" "PSNG-Streams" "PSNG-Streams" }}
   <span class="post-meta__sep">&middot;</span>
   {{- range first 1 . }}
-  <a href="{{ "categories/" | relURL }}{{ . | urlize }}/" class="post-meta__category">{{ . }}</a>
+  {{ $label := index $pluralLabels . }}
+  <a href="{{ "categories/" | relURL }}{{ . | urlize }}/" class="post-meta__category">{{ if $label }}{{ $label }}{{ else }}{{ . }}{{ end }}</a>
   {{- end }}
   {{- end }}
 </div>

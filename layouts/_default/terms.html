@@ -3,14 +3,16 @@
 {{ if eq .Data.Plural "categories" }}
   {{ $title = "Kategorien" }}
 {{ end }}
+{{ $pluralLabels := dict "Buch" "Bücher" "Bücher" "Bücher" "Film" "Filme" "Filme" "Filme" "Podcast" "Podcasts" "Podcasts" "Podcasts" "Paper" "Paper" "Artikel" "Artikel" "Youtube" "YouTube" "YouTube" "YouTube" "PSNG-Stream" "PSNG-Streams" "PSNG-Streams" "PSNG-Streams" }}
 <div class="container" style="padding: 4rem 0;">
   <div class="section-header">
     <h1 class="section-header__title">{{ $title }}</h1>
   </div>
   <div class="chip-group" style="margin-top: 2rem;">
     {{- range .Pages }}
+    {{ $label := index $pluralLabels .Title }}
     <a href="{{ .RelPermalink }}" class="chip">
-      {{ .Title }}<span class="chip__count">({{ len .Pages }})</span>
+      {{ if $label }}{{ $label }}{{ else }}{{ .Title }}{{ end }}<span class="chip__count">({{ len .Pages }})</span>
     </a>
     {{- end }}
   </div>

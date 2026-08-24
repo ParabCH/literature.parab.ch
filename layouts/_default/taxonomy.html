@@ -1,8 +1,11 @@
 {{ define "main" }}
+{{ $pluralLabels := dict "Buch" "Bücher" "Bücher" "Bücher" "Film" "Filme" "Filme" "Filme" "Podcast" "Podcasts" "Podcasts" "Podcasts" "Paper" "Paper" "Artikel" "Artikel" "Youtube" "YouTube" "YouTube" "YouTube" "PSNG-Stream" "PSNG-Streams" "PSNG-Streams" "PSNG-Streams" }}
 <div class="container" style="padding: 4rem 0;">
   <div class="section-header">
     <h1 class="section-header__title" style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0;">
-      <span class="chip chip--active" style="font-size: 1.5rem; line-height: 1.2; padding: 0.6rem 1rem;">{{ .Title }}</span>
+      {{ $currentTitle := .Title }}
+      {{ if index $pluralLabels .Title }}{{ $currentTitle = index $pluralLabels .Title }}{{ end }}
+      <span class="chip chip--active" style="font-size: 1.5rem; line-height: 1.2; padding: 0.6rem 1rem;">{{ $currentTitle }}</span>
       {{ $alternates := dict "Bücher" (slice (dict "title" "Paper" "url" "/categories/paper/") (dict "title" "Artikel" "url" "/categories/artikel/")) "Paper" (slice (dict "title" "Bücher" "url" "/categories/buch/") (dict "title" "Artikel" "url" "/categories/artikel/")) "Artikel" (slice (dict "title" "Bücher" "url" "/categories/buch/") (dict "title" "Paper" "url" "/categories/paper/")) "Film" (slice (dict "title" "PSNG-Stream" "url" "/categories/psng-stream/") (dict "title" "Youtube" "url" "/categories/youtube/")) "PSNG-Stream" (slice (dict "title" "Film" "url" "/categories/film/") (dict "title" "Youtube" "url" "/categories/youtube/")) "Youtube" (slice (dict "title" "Film" "url" "/categories/film/") (dict "title" "PSNG-Stream" "url" "/categories/psng-stream/")) }}
       {{ $current := index $alternates .Title }}
       {{ if $current }}

@@ -15,14 +15,16 @@
   {{ $cats := .Site.Taxonomies.categories }}
   {{ $tags := .Site.Taxonomies.tags }}
   {{ $preview := 12 }}
+  {{ $pluralLabels := dict "Buch" "Bücher" "Bücher" "Bücher" "Film" "Filme" "Filme" "Filme" "Podcast" "Podcasts" "Podcasts" "Podcasts" "Paper" "Paper" "Artikel" "Artikel" "Youtube" "YouTube" "YouTube" "YouTube" "PSNG-Stream" "PSNG-Streams" "PSNG-Streams" "PSNG-Streams" }}
   <div class="filter" data-filter>
     {{ if gt (len $cats) 0 }}
     <div class="filter__row">
       <span class="filter__label">Kategorien</span>
       <div class="chip-group">
         {{- range $cats.ByCount }}
+        {{ $label := index $pluralLabels .Page.Title }}
         <a href="{{ "categories/" | relURL }}{{ .Name | urlize }}/" class="chip"
-           data-filter-cat="{{ .Name | urlize }}">{{ .Page.Title }}<span class="chip__count">{{ .Count }}</span></a>
+           data-filter-cat="{{ .Name | urlize }}">{{ if $label }}{{ $label }}{{ else }}{{ .Page.Title }}{{ end }}<span class="chip__count">{{ .Count }}</span></a>
         {{- end }}
       </div>
     </div>

@@ -11,10 +11,12 @@
           <div class="footer__button-group">
             <a href="{{ "/" | relURL }}" class="btn btn--ghost footer__button">Startseite</a>
             <a href="{{ "posts/" | relURL }}" class="btn btn--ghost footer__button">Alle Beiträge</a>
-            <a href="{{ "categories/buch/" | relURL }}" class="btn btn--ghost footer__button">Bücher</a>
-            <a href="{{ "categories/paper/" | relURL }}" class="btn btn--ghost footer__button">Paper</a>
+            {{ $pluralLabels := dict "Buch" "Bücher" "Bücher" "Bücher" "Film" "Filme" "Filme" "Filme" "Podcast" "Podcasts" "Podcasts" "Podcasts" "Paper" "Paper" "Artikel" "Artikel" "Youtube" "YouTube" "YouTube" "YouTube" "PSNG-Stream" "PSNG-Streams" "PSNG-Streams" "PSNG-Streams" }}
+            {{ range .Site.Taxonomies.categories.ByCount }}
+            {{ $label := index $pluralLabels .Page.Title }}
+            <a href="{{ .Page.RelPermalink | relURL }}" class="btn btn--ghost footer__button">{{ if $label }}{{ $label }}{{ else }}{{ .Page.Title }}{{ end }}</a>
+            {{ end }}
             <a href="https://psng.info/" target="_blank" rel="noopener" class="btn btn--ghost footer__button">PSNG Hauptseite</a>
-            <a href="{{ "categories/podcast/" | relURL }}" class="btn btn--ghost footer__button">Podcasts</a>
           </div>
         </div>
         <div>
