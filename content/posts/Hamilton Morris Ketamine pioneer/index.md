@@ -12,7 +12,6 @@ categories:
 tags:
   - Ketamin
   - Forschung
-  - Gaiamedia
 toc: true
 source_url: "https://www.youtube.com/watch?v=RedJjCyipcc"
 ---

@@ -1,7 +1,11 @@
 {{ define "main" }}
+{{ $title := .Title }}
+{{ if eq .Data.Plural "categories" }}
+  {{ $title = "Kategorien" }}
+{{ end }}
 <div class="container" style="padding: 4rem 0;">
   <div class="section-header">
-    <h1 class="section-header__title">{{ .Title }}</h1>
+    <h1 class="section-header__title">{{ $title }}</h1>
   </div>
   <div class="chip-group" style="margin-top: 2rem;">
     {{- range .Pages }}

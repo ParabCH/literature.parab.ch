@@ -13,7 +13,6 @@ tags:
   - Dissoziativa
   - Anästhetika
   - Bewusstsein
-  - Gaiamedia
 toc: true
 source_url: "https://www.youtube.com/shorts/btV_ZCB9Up8"
 ---

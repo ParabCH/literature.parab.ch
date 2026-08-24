@@ -13,7 +13,6 @@ tags:
   - Mescalin
   - Schamanismus
   - Peyote
-  - Gaiamedia
 toc: true
 source_url: "https://www.youtube.com/shorts/Y4iTSLB8GeI"
 ---

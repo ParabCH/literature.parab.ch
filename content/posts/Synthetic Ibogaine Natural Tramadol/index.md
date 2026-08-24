@@ -13,7 +13,6 @@ tags:
   - Ibogaine
   - Tramadol
   - Pharmakologie
-  - Gaiamedia
 toc: true
 source_url: "https://www.youtube.com/watch?v=ig8V5u-G7R0"
 ---

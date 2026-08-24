@@ -13,7 +13,6 @@ tags:
   - Ketamin
   - Medizin
   - Drogenpolitik
-  - Gaiamedia
 toc: true
 source_url: "https://www.youtube.com/watch?v=tRfzvpySDws"
 ---

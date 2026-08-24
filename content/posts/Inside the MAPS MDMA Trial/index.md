@@ -13,7 +13,6 @@ tags:
   - MDMA
   - Psychedelische Therapie
   - Klinische Forschung
-  - Gaiamedia
 toc: true
 source_url: "https://www.youtube.com/watch?v=9PZcezo__8A"
 ---

@@ -13,7 +13,6 @@ tags:
   - MDMA
   - Chemie
   - Drogenpolitik
-  - Gaiamedia
 toc: true
 source_url: "https://www.youtube.com/watch?v=owqLpbKWqw0"
 ---

@@ -12,7 +12,6 @@ categories:
 tags:
   - Ketamin
   - Geschichte
-  - Gaiamedia
 toc: true
 source_url: "https://www.youtube.com/watch?v=h0SmCNX5N_Q"
 ---
