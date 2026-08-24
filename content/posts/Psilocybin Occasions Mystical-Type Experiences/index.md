@@ -13,7 +13,6 @@ categories:
   - Paper
 tags:
   - Psilocybin
-  - Johns Hopkins
   - Mystik
   - Studie
 ---

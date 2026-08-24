@@ -14,7 +14,7 @@ tags:
   - DMT
   - Neurowissenschaft
   - Nahtoderfahrung
-  - Bewusstseinsforschung
+  - Bewusstsein
 ---
 
 ## Warum ist dises Paper lesenswert?

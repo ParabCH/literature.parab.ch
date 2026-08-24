@@ -12,7 +12,7 @@ description: "Ein breiter Überblick: Was Psychedelika sind und wie sie im Gehir
 categories:
   - PSNG-Stream
 tags:
-  - Neuroscience
+  - Neurowissenschaft
   - REBUS
   - DMN
 ---

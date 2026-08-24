@@ -11,7 +11,7 @@ description: "Autobiografisches Standardwerk und detaillierte Synthese- sowie Bi
 tags:
   - Chemie
   - Pharmakologie
-  - Shulgin
+
 categories: ["Buch"]
 toc: false
 ---

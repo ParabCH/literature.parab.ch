@@ -12,7 +12,7 @@ categories:
   - Buch
 tags:
   - Ethnobotanik
-  - Kulturgeschichte
+  - Kultur
   - Nachschlagewerk
 toc: false
 ---

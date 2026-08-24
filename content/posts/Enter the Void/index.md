@@ -12,7 +12,6 @@ categories:
   - Film
 tags:
   - DMT
-  - Experimentalfilm
   - Philosophie
   - Visuell
 ---

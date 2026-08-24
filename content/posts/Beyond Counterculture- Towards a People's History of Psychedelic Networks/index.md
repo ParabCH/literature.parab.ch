@@ -11,7 +11,7 @@ description: "Ein historischer und religionswissenschaftlicher Aufsatz über die
 categories:
   - Paper
 tags:
-  - Kulturgeschichte
+  - Kultur
   - Religionswissenschaft
   - Psychedelicism
   - Soziologie

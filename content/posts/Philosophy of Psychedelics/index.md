@@ -12,7 +12,6 @@ categories:
   - Buch
 tags:
   - Philosophie
-  - Epistemologie
   - Bewusstsein
 ---
 

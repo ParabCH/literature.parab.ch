@@ -14,7 +14,6 @@ tags:
   - Neurowissenschaft
   - Neuroplastizität
   - DMN
-  - Gehirnforschung
 ---
 
 ## Warum ist dieses Paper lesenswert?

@@ -12,8 +12,8 @@ categories:
   - Paper
 tags:
   - Psilocybin
-  - Depressionsforschung
-  - Klinische Studie
+  - Depression
+  - Klinisch
 ---
 
 ## Warum ist dieses Paper lesenswert?

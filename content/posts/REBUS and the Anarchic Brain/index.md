@@ -14,7 +14,6 @@ tags:
   - Neurowissenschaft
   - Modelliereung
   - Pharmakologie
-  - Expertenwissen
 ---
 
 ## Warum ist dieses Paper lesenswert?

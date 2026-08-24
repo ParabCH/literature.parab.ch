@@ -13,7 +13,6 @@ categories:
 tags:
   - Pharmakologie
   - Biochemie
-  - Expertenwissen
 ---
 
 ## Warum ist diese Review lesenswert?

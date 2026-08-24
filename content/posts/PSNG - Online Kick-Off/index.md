@@ -12,7 +12,7 @@ description: "Das PSNG ist live! Aufnahme des Online Kick-Offs am 3. März 2026.
 categories:
   - PSNG-Stream
 tags:
-  - Neuroscience
+  - Neurowissenschaft
   - REBUS
   - DMN
 ---

@@ -14,7 +14,6 @@ tags:
   - Harm Reduction
   - Guiding
   - Microdosing
-  - Praxis
 ---
 
 ## Warum ist dieses Buch lesenswert?

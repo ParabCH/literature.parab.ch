@@ -13,7 +13,6 @@ categories:
 tags:
   - Dokumentation
   - Mykologie
-  - Natur
   - Psilocybin
 ---
 
