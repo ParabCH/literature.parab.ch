@@ -31,7 +31,7 @@
       {{ end }}
     </header>
 
-    {{ $isStream := in .Params.categories "PSNG-Stream" }}
+    {{ $isStream := or (in .Params.categories "PSNG-Stream") (in .Params.categories "Youtube") }}
     {{ if and $isStream .Params.youtube }}
     <div class="post-hero post-video">
       <iframe
