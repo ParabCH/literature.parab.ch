@@ -7,6 +7,7 @@ draft: false
 featured: false
 description: "Ein ausführliches Gespräch mit Dr. David Nichols über psychedelische Forschung, Stoffklassen und die Bedeutung klinischer Perspektiven."
 youtube: "IYWITI4fGJw"
+image: "https://i.ytimg.com/vi/IYWITI4fGJw/hqdefault.jpg"
 categories:
   - Youtube
 tags:

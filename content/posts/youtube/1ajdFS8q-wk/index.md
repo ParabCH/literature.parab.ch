@@ -7,6 +7,7 @@ draft: false
 featured: false
 description: "YouTube-Video mit dem Identifikator 1ajdFS8q-wk. Link und Eintrag wurden für den Blog vorbereitet."
 youtube: "1ajdFS8q-wk"
+image: "https://i.ytimg.com/vi/1ajdFS8q-wk/hqdefault.jpg"
 categories:
   - Youtube
 tags:

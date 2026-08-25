@@ -7,6 +7,7 @@ draft: false
 featured: false
 description: "YouTube-Video mit dem Identifikator QRArM5Ev4EE. Link und Eintrag wurden für den Blog vorbereitet."
 youtube: "QRArM5Ev4EE"
+image: "https://i.ytimg.com/vi/QRArM5Ev4EE/hqdefault.jpg"
 categories:
   - Youtube
 tags:

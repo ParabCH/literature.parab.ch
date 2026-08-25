@@ -7,6 +7,7 @@ draft: false
 featured: false
 description: "Video über die chemische Bildung, Zugang zu Wissen und die Kosten, die mit einem scheinbar freien Wissenszugang verbunden sind."
 youtube: "XTaiclBfrEY"
+image: "https://i.ytimg.com/vi/XTaiclBfrEY/hqdefault.jpg"
 categories:
   - Youtube
 tags:

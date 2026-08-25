@@ -7,6 +7,7 @@ draft: false
 featured: false
 description: "YouTube-Video mit dem Identifikator YBC9_mHXVrg. Link und Eintrag wurden für den Blog vorbereitet."
 youtube: "YBC9_mHXVrg"
+image: "https://i.ytimg.com/vi/YBC9_mHXVrg/hqdefault.jpg"
 categories:
   - Youtube
 tags:

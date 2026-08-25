@@ -7,6 +7,7 @@ draft: false
 featured: false
 description: "YouTube-Video mit dem Identifikator MWxH6hhpISA. Link und Eintrag wurden für den Blog vorbereitet."
 youtube: "MWxH6hhpISA"
+image: "https://i.ytimg.com/vi/MWxH6hhpISA/hqdefault.jpg"
 categories:
   - Youtube
 tags:

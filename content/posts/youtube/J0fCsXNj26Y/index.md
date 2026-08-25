@@ -7,6 +7,7 @@ draft: false
 featured: false
 description: "YouTube-Video mit dem Identifikator J0fCsXNj26Y. Link und Eintrag wurden für den Blog vorbereitet."
 youtube: "J0fCsXNj26Y"
+image: "https://i.ytimg.com/vi/J0fCsXNj26Y/hqdefault.jpg"
 categories:
   - Youtube
 tags:

@@ -7,6 +7,7 @@ draft: false
 featured: false
 description: "Gespräch über DMT, Entitäten und die wissenschaftliche und philosophische Debatte um die Natur dieser Erfahrungen."
 youtube: "ba5pAjM8HZM"
+image: "https://i.ytimg.com/vi/ba5pAjM8HZM/hqdefault.jpg"
 categories:
   - Youtube
 tags:

@@ -7,6 +7,7 @@ draft: false
 featured: false
 description: "Gespräch über das Kentucky Ibogaine Program, klinische Perspektiven und die Rolle von Ibogaine im therapeutischen und gesellschaftlichen Kontext."
 youtube: "co-q4v1IQt0"
+image: "https://i.ytimg.com/vi/co-q4v1IQt0/hqdefault.jpg"
 categories:
   - Youtube
 tags:

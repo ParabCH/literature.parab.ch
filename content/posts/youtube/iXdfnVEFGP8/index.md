@@ -7,6 +7,7 @@ draft: false
 featured: false
 description: "YouTube-Video mit dem Identifikator iXdfnVEFGP8. Link und Eintrag wurden für den Blog vorbereitet."
 youtube: "iXdfnVEFGP8"
+image: "https://i.ytimg.com/vi/iXdfnVEFGP8/hqdefault.jpg"
 categories:
   - Youtube
 tags:
