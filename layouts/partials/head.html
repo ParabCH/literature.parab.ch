@@ -24,12 +24,17 @@
   {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
 {{- end }}
 
+{{/* Bild für die Vorschau beim Teilen: das eigene Bild des Beitrags, sonst eine
+     beim Bauen erzeugte Kachel mit Titel und Urheber. */}}
+{{ $image := partial "post-image.html" . }}
+{{ if and (not $image) .IsPage (eq .Section "posts") }}{{ $image = partial "post-og-image.html" . }}{{ end }}
+
 {{/* Open Graph */}}
 <meta property="og:title" content="{{ .Title }}">
 <meta property="og:description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
 <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
 <meta property="og:url" content="{{ .Permalink }}">
-{{ with .Params.image -}}
+{{ with $image -}}
 <meta property="og:image" content="{{ . | absURL }}">
 {{- end }}
 
@@ -37,6 +42,9 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{{ .Title }}">
 <meta name="twitter:description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+{{ with $image -}}
+<meta name="twitter:image" content="{{ . | absURL }}">
+{{- end }}
 
 {{/* Canonical */}}
 <link rel="canonical" href="{{ .Permalink }}">

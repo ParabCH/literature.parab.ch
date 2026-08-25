@@ -46,6 +46,10 @@
       <figure class="post-hero">
         <img src="{{ . }}" alt="{{ $.Title }}" loading="lazy" decoding="async">
       </figure>
+      {{ else }}
+      <figure class="post-hero">
+        {{ partial "post-cover.html" . }}
+      </figure>
       {{ end }}
     {{ end }}
 

@@ -5,7 +5,6 @@ publication: "2021 (The New England Journal of Medicine)"
 recommendation: "Blue Rabbit"
 date: 2026-07-28
 draft: false
-image: "/images/carhart_harris_nejm.jpg"
 featured: true
 description: "Die Meilenstein-Doppelblindstudie zum direkten Vergleich von Psilocybin-Therapie und einem Standard-Antidepressivum (SSRI)."
 categories:

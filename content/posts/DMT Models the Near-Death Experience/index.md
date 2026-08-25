@@ -5,7 +5,6 @@ publication: "2018 (Frontiers in Psychology)"
 recommendation: "Blue Rabbit"
 date: 2026-07-28
 draft: false
-image: "/images/timmermann_dmt_nde.jpg"
 featured: true
 description: "Pionierstudie des Imperial College London über die phänomenologischen Parallelen zwischen DMT-Erfahrungen und Nahtoderfahrungen."
 categories:

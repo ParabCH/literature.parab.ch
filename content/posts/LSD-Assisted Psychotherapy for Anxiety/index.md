@@ -5,7 +5,6 @@ publication_year: "2014"
 recommendation: "Blue Rabbit"
 date: 2026-07-28
 draft: false
-image: "/images/gasser_2014.jpg"
 featured: false
 description: "Erste kontrollierte klinische LSD-Studie nach über 35 Jahren Forschungspause (Schweiz)."
 categories:

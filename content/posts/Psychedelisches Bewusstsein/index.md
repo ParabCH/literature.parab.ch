@@ -4,7 +4,6 @@ resource_author: "Markus Berger"
 publication: "Integral, 2026"
 date: 2026-08-01
 draft: false
-image: "/images/GAIAMEDIA.webp"
 featured: false
 image: "/images/Psychdelisches_Bewusstsein.png"
 description: "Markus Berger entwirft eine spirituelle und schamanische Kosmologie für Erfahrungen mit LSD, Psilocybin, DMT und anderen Psychedelika."

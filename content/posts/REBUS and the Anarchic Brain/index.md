@@ -5,7 +5,6 @@ publication_year: "2019"
 recommendation: "Blue Rabbit"
 date: 2026-07-28
 draft: false
-image: "/images/rebus_paper.jpg"
 featured: true
 description: "Das theoretische Standardwerk zum REBUS-Modell (Relaxed Beliefs Under Psychedelics) und Bayesian Brain Theory."
 categories:

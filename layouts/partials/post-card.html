@@ -5,13 +5,9 @@
       <img src="{{ . }}" alt="{{ $.page.Title }}" loading="lazy" decoding="async">
     </div>
     {{ else }}
-    {{/* Ohne Bild: nur der grosse Beitrag behält den Platzhalter, damit sein
-         zweispaltiges Layout nicht zusammenfällt. */}}
-    {{ if $.featured }}
     <div class="post-card__image">
-      <span>Beitrag</span>
+      {{ partial "post-cover.html" .page }}
     </div>
-    {{ end }}
     {{ end }}
     <div>
       <div class="post-card__meta">

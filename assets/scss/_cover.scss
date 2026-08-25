@@ -1,0 +1,147 @@
+// Ersatzkachel für Beiträge ohne eigenes Bild (layouts/partials/post-cover.html).
+//
+// Dasselbe Bild wie unter assets/cover/, nur als Text. Alle Masse sind aus der
+// 1200x750 grossen Kachel umgerechnet: cqw ist ein Hundertstel der Kartenbreite,
+// ein Wert von 1200 px wird also durch 12 geteilt. So sieht die kleine Karte in
+// der Liste gleich aus wie die grosse über dem Beitrag.
+
+.post-cover {
+  container-type: inline-size;
+  aspect-ratio: 8 / 5;
+  width: 100%;
+  overflow: hidden;
+  background: linear-gradient(145deg, var(--cover-from) 0%, var(--cover-to) 100%);
+  color: #fff;
+}
+
+.post-cover__inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 6cqw 6.667cqw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.post-cover__glow {
+  position: absolute;
+  top: -20cqw;
+  right: -16.667cqw;
+  width: 58.333cqw;
+  height: 58.333cqw;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0) 68%);
+}
+
+.post-cover__icon {
+  position: absolute;
+  right: 5.333cqw;
+  bottom: 3.333cqw;
+  font-size: 15.833cqw;
+  line-height: 1;
+  opacity: 0.13;
+}
+
+// Die feine dunkle Ringschrift des Logos verschwindet auf dunklem Grund –
+// deshalb sitzt es auf einer hellen runden Fläche.
+.post-cover__badge {
+  position: absolute;
+  top: 3.667cqw;
+  right: 4.333cqw;
+  width: 12.333cqw;
+  height: 12.333cqw;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    display: block;
+    height: 9.667cqw;
+    width: auto;
+  }
+}
+
+.post-cover__kicker {
+  position: relative;
+  font-family: $font-ui;
+  font-size: 1.833cqw;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--cover-accent);
+}
+
+.post-cover__text {
+  position: relative;
+  display: block;
+  max-width: 78cqw;
+}
+
+.post-cover__title {
+  display: block;
+  font-family: $font-display;
+  font-weight: 700;
+  font-size: 5.5cqw;
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+}
+
+.post-cover__rule {
+  display: block;
+  width: 7cqw;
+  height: 0.333cqw;
+  min-height: 1px;
+  border-radius: 0.167cqw;
+  background: var(--cover-accent);
+  margin: 2.167cqw 0 1.833cqw;
+}
+
+.post-cover__meta {
+  display: block;
+  font-family: $font-ui;
+  font-size: 2.083cqw;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.post-cover__pub {
+  display: block;
+  font-family: $font-ui;
+  font-size: 1.667cqw;
+  color: rgba(255, 255, 255, 0.6);
+  margin-top: 0.667cqw;
+}
+
+// Auf der kleinen Karte in der Liste bleibt vom Kleingedruckten nur ein
+// grauer Strich übrig. Also weniger zeigen und den Titel grösser setzen –
+// das kann die Karte, ein fertiges Bild nicht.
+@container (max-width: 420px) {
+  .post-cover__pub {
+    display: none;
+  }
+
+  .post-cover__kicker {
+    font-size: 3cqw;
+  }
+
+  .post-cover__title {
+    font-size: 7.5cqw;
+  }
+
+  .post-cover__meta {
+    font-size: 3.2cqw;
+  }
+
+  .post-cover__rule {
+    margin: 3cqw 0 2.5cqw;
+  }
+}
+
+// In der Liste sitzt die Karte im Bildrahmen, der schon Rundung und
+// Hintergrund mitbringt – hier zählt nur, dass sie ihn ganz ausfüllt.
+.post-card__image .post-cover {
+  height: 100%;
+}
