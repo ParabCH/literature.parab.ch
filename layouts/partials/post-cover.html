@@ -1,0 +1,31 @@
+{{- /*
+  Ersatzbild für Beiträge ohne eigenes Bild – als HTML, nicht als Datei.
+
+  Sieht aus wie die Kachel unter assets/cover/, ist aber echter Text: er bleibt
+  scharf, lässt sich markieren und braucht nichts zu laden. Alle Masse stehen in
+  cqw, deshalb passt dieselbe Karte in die kleine Liste und über den Beitrag.
+
+  Für die Vorschau beim Teilen braucht es trotzdem eine Bilddatei – die kommt
+  aus post-og-image.html.
+
+  Aufruf: {{ partial "post-cover.html" . }}
+*/ -}}
+{{- $theme := partial "cover-theme.html" . -}}
+{{- $author := .Params.resource_author | default .Params.author | default "" -}}
+<div class="post-cover" aria-hidden="true"
+     style="--cover-from: {{ $theme.from }}; --cover-to: {{ $theme.to }}; --cover-accent: {{ $theme.accent }};">
+  <div class="post-cover__inner">
+    <span class="post-cover__glow"></span>
+    <span class="post-cover__icon">{{ $theme.icon }}</span>
+    <span class="post-cover__badge">
+      <img src="{{ "images/logo.webp" | relURL }}" alt="" loading="lazy" decoding="async">
+    </span>
+    <span class="post-cover__kicker">{{ $theme.label }}</span>
+    <span class="post-cover__text">
+      <span class="post-cover__title">{{ .Title }}</span>
+      <span class="post-cover__rule"></span>
+      {{- with $author }}<span class="post-cover__meta">{{ . }}</span>{{ end }}
+      {{- with .Params.publication }}<span class="post-cover__pub">{{ . }}</span>{{ end }}
+    </span>
+  </div>
+</div>

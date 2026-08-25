@@ -18,18 +18,31 @@ dots. Umlauts are fine.
 hugo server -D                                        # preview on localhost:1313
 hugo new content --kind post "posts/Titel/index.md"   # new post (--kind post is required)
 hugo --minify                                         # build into public/
-python3 scripts/generate-post-images.py               # fill in missing post images
 ```
 
 Needs Hugo **extended**. Images go in `static/images/`, referenced as
 `image: "/images/foo.jpg"` in the post front matter.
 
-A post whose image file is missing shows no image at all. The script finds those posts by
-itself and builds a tile for each — title, author and category in the site colours, PSNG
-logo top right. `--dry-run` lists what it would do.
+## Posts without a picture
 
-Got a real picture? Drop it into `static/images/` under the name the front matter uses. The
-script never overwrites it: `--force` only rebuilds tiles it made itself.
+Nothing to do — Hugo makes the cover. A post with no `image:` (or one that points at a
+file which is not there) gets a tile with its title, author and publication in the colours
+of its category, PSNG logo top right.
+
+On the page itself the tile is HTML, not a picture: `layouts/partials/post-cover.html`
+plus `assets/scss/_cover.scss`. The text stays sharp at every size and costs no download.
+
+For the preview when someone shares the link, `layouts/partials/post-og-image.html` writes
+a real 1200x750 JPEG during the build, from a base picture under `assets/cover/` and the
+fonts under `assets/fonts/`.
+
+Got a real picture? Drop it into `static/images/`, add the `image:` line, and it wins over
+the tile.
+
+Change the colours or add a category in `layouts/partials/cover-theme.html`. The base
+pictures carry the same colours, so run `python3 scripts/make-cover-bases.py` afterwards
+and commit what it writes. That is the only step that needs Python, and only when the
+look changes.
 
 ## Ratings, comments, edit proposals, submissions
 
@@ -48,7 +61,6 @@ content/posts/<Titel>/index.md
 static/images/<slug>.jpg
 ```
 
-Read the PR, flip the draft flag, merge. No cover? Drop the `image:` line and let
-`generate-post-images.py` build a tile. If the backend is unreachable, the submission
-form falls back to downloading the `.md` and asking the sender to mail it to
-`[params.submit].mailTo`.
+Read the PR, flip the draft flag, merge. No cover? Drop the `image:` line and Hugo builds
+a tile. If the backend is unreachable, the submission form falls back to downloading the
+`.md` and asking the sender to mail it to `[params.submit].mailTo`.

@@ -1,0 +1,95 @@
+{{- /*
+  Erzeugt beim Bauen eine Kachel für Beiträge ohne eigenes Bild und gibt deren
+  absolute URL zurück – für og:image und twitter:image. Auf der Seite selbst
+  steht statt dessen die HTML-Karte aus post-cover.html.
+
+  Grundbild (Verlauf, Logo, Zeichen) kommt aus assets/cover/, den Text schreibt
+  Hugo darüber. Leerer String, wenn das Grundbild fehlt.
+
+  Die Masse folgen der alten Kachel: 1200x750, Rand 80/72, Titel unten links,
+  Kategorie oben links.
+*/ -}}
+{{- $theme := partial "cover-theme.html" . -}}
+{{- $base := resources.Get (printf "cover/base-%s.png" $theme.name) -}}
+{{- $rule := resources.Get (printf "cover/rule-%s.png" $theme.name) -}}
+{{- $url := "" -}}
+
+{{- if and $base $rule -}}
+  {{- $fontTitle := resources.Get "fonts/PlusJakartaSans-Bold.ttf" -}}
+  {{- $fontKicker := resources.Get "fonts/Inter-SemiBold.ttf" -}}
+  {{- $fontMeta := resources.Get "fonts/Inter-Medium.ttf" -}}
+  {{- $fontPub := resources.Get "fonts/Inter-Regular.ttf" -}}
+
+  {{- $left := 80 -}}
+  {{- $bottom := 678 -}}                {{/* 750 minus Rand unten */}}
+  {{- $textWidth := 900 -}}
+
+  {{/* Grösste Schrift wählen, bei welcher der Titel in die erlaubten Zeilen
+       passt. Ohne Buchstabenbreiten wird in Zeichen gerechnet: ein Zeichen ist
+       im Mittel gut halb so breit wie hoch. Beim kleinsten Grad wird gekürzt. */}}
+  {{- $title := .Title | strings.TrimSpace -}}
+  {{- $size := 50 -}}
+  {{- $lines := slice -}}
+  {{- $chosen := false -}}
+  {{- range slice
+      (dict "size" 92 "max" 2) (dict "size" 78 "max" 2) (dict "size" 66 "max" 3)
+      (dict "size" 58 "max" 3) (dict "size" 50 "max" 4) -}}
+    {{- if not $chosen -}}
+      {{- $budget := int (div $textWidth (mul 0.55 .size)) -}}
+      {{- $wrapped := partial "cover-wrap.html" (dict "text" $title "budget" $budget "max" 99) -}}
+      {{- if le (len $wrapped) .max -}}
+        {{- $size = .size -}}
+        {{- $lines = $wrapped -}}
+        {{- $chosen = true -}}
+      {{- else if eq .size 50 -}}
+        {{- $size = .size -}}
+        {{- $lines = partial "cover-wrap.html" (dict "text" $title "budget" $budget "max" .max) -}}
+        {{- $chosen = true -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- $author := .Params.resource_author | default .Params.author | default "" -}}
+  {{- $publication := .Params.publication | default "" -}}
+
+  {{/* Von unten nach oben stapeln, wie im Flex-Layout der alten Kachel. */}}
+  {{- $y := $bottom -}}
+  {{- $yPub := 0 -}}
+  {{- if $publication -}}
+    {{- $y = sub $y 26 -}}
+    {{- $yPub = $y -}}
+    {{- $y = sub $y 8 -}}
+  {{- end -}}
+  {{- $yMeta := 0 -}}
+  {{- if $author -}}
+    {{- $y = sub $y 33 -}}
+    {{- $yMeta = $y -}}
+  {{- end -}}
+  {{- $yRule := sub $y 26 -}}          {{/* 22 unter dem Strich, 4 Strichhöhe */}}
+  {{- $lineHeight := int (math.Round (mul 1.12 $size)) -}}
+  {{- $yTitle := sub (sub $yRule 26) (mul $lineHeight (len $lines)) -}}
+
+  {{- $img := $base -}}
+  {{- $filters := slice
+      (images.Text (delimit (split (upper $theme.label) "") " ") (dict
+        "font" $fontKicker "size" 22 "color" $theme.accent "x" $left "y" 72))
+      (images.Text (delimit $lines "\n") (dict
+        "font" $fontTitle "size" $size "color" "#ffffff"
+        "x" $left "y" $yTitle "linespacing" (sub $lineHeight $size)))
+      (images.Overlay $rule $left $yRule)
+  -}}
+  {{- with $author -}}
+    {{- $filters = $filters | append (images.Text . (dict
+        "font" $fontMeta "size" 25 "color" "#e7dbe2" "x" $left "y" $yMeta)) -}}
+  {{- end -}}
+  {{- with $publication -}}
+    {{- $filters = $filters | append (images.Text . (dict
+        "font" $fontPub "size" 20 "color" "#bd99ac" "x" $left "y" $yPub)) -}}
+  {{- end -}}
+
+  {{- $img = $img | images.Filter $filters -}}
+  {{- $img = $img.Process "jpg q88" -}}
+  {{- $img = resources.Copy (printf "images/cover/%s.jpg" (path.Base .RelPermalink)) $img -}}
+  {{- $url = $img.Permalink -}}
+{{- end -}}
+{{- return $url -}}

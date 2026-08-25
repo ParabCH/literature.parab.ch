@@ -1,0 +1,31 @@
+{{- /*
+  Text auf Zeilen verteilen – images.Text bricht nicht selbst um.
+
+  Erwartet: text, budget (Zeichen pro Zeile), max (Zeilen höchstens).
+  Gibt eine Liste von Zeilen zurück. Was über max hinausgeht, fällt weg; die
+  letzte Zeile bekommt dann ein Auslassungszeichen.
+
+  Gemessen wird in Zeichen, nicht in Pixeln – Hugo kennt die Buchstabenbreiten
+  nicht. Der Aufrufer rechnet das Budget aus der Schriftgrösse aus.
+*/ -}}
+{{- $lines := slice -}}
+{{- $current := "" -}}
+{{- range (split .text " ") -}}
+  {{- $word := . -}}
+  {{- $try := cond (eq $current "") $word (printf "%s %s" $current $word) -}}
+  {{- if and (gt (strings.RuneCount $try) $.budget) (ne $current "") -}}
+    {{- $lines = $lines | append $current -}}
+    {{- $current = $word -}}
+  {{- else -}}
+    {{- $current = $try -}}
+  {{- end -}}
+{{- end -}}
+{{- with $current -}}
+  {{- $lines = $lines | append . -}}
+{{- end -}}
+{{- if gt (len $lines) $.max -}}
+  {{- $kept := first (sub $.max 1) $lines -}}
+  {{- $last := index $lines (sub $.max 1) -}}
+  {{- $lines = $kept | append (printf "%s…" (substr $last 0 (sub $.budget 1))) -}}
+{{- end -}}
+{{- return $lines -}}

@@ -5,7 +5,6 @@ publication: "2025 (Harvard CSWR / South Atlantic Quarterly)"
 recommendation: "Blue Rabbit"
 date: 2026-07-28
 draft: false
-image: "/images/greer_psychedelicism.jpg"
 featured: false
 description: "Ein historischer und religionswissenschaftlicher Aufsatz über die Vielfalt psychedelischer Netzwerke abseits des veralteten 'Gegenkultur'-Begriffs."
 categories:

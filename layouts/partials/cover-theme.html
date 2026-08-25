@@ -1,0 +1,30 @@
+{{- /*
+  Farbwelt und Kategoriezeichen für die Ersatzkachel eines Beitrags.
+
+  Gibt ein Dict zurück: name (Dateiname der Grundbilder unter assets/cover/),
+  label (Zeile oben auf der Kachel), accent, from, to und icon (für die
+  HTML-Karte in post-cover.html). Ohne passende Kategorie kommt «beitrag».
+
+  Die Farben stehen ausserdem in scripts/make-cover-bases.py – dort entstehen
+  die Grundbilder daraus. Ändert sich hier etwas, muss das Skript einmal laufen.
+*/ -}}
+{{- $themes := dict
+  "buch"        (dict "name" "buch"        "label" "Buch"        "icon" "📖"  "accent" "#D98CB0" "from" "#570030" "to" "#26010F")
+  "paper"       (dict "name" "paper"       "label" "Paper"       "icon" "📃"  "accent" "#D98CB0" "from" "#570030" "to" "#26010F")
+  "artikel"     (dict "name" "artikel"     "label" "Artikel"     "icon" "📰"  "accent" "#D98CB0" "from" "#570030" "to" "#26010F")
+  "film"        (dict "name" "film"        "label" "Film"        "icon" "🎬"  "accent" "#E39CC0" "from" "#741B47" "to" "#2E0A1D")
+  "youtube"     (dict "name" "youtube"     "label" "Video"       "icon" "▶"   "accent" "#E39CC0" "from" "#741B47" "to" "#2E0A1D")
+  "podcast"     (dict "name" "podcast"     "label" "Podcast"     "icon" "🎧"  "accent" "#F0AAD0" "from" "#8E2A5E" "to" "#3A1027")
+  "psng-stream" (dict "name" "psng-stream" "label" "PSNG-Stream" "icon" "🎙️" "accent" "#F0AAD0" "from" "#8E2A5E" "to" "#3A1027")
+-}}
+{{- $theme := dict "name" "beitrag" "label" "Beitrag" "icon" "✦" "accent" "#D98CB0" "from" "#570030" "to" "#26010F" -}}
+{{- $found := false -}}
+{{- range .Params.categories -}}
+  {{- if not $found -}}
+    {{- with index $themes (lower (strings.TrimSpace .)) -}}
+      {{- $theme = . -}}
+      {{- $found = true -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- return $theme -}}

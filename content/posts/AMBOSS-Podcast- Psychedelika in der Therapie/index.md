@@ -3,7 +3,6 @@ title: "AMBOSS-Podcast: Psychedelika in der Therapie"
 resource_author: "Dr. Andrea Jungaberle (Interview)"
 date: 2026-07-28
 draft: false
-image: "/images/amboss_podcast.jpg"
 featured: true
 description: "Fundierter medizinischer Einblick in die aktuelle Studienlage, Psychotherapie und klinische Praxis in Deutschland."
 categories:

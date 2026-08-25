@@ -5,7 +5,6 @@ publication: "2023 (Neuropsychopharmacology)"
 recommendation: "Blue Rabbit"
 date: 2026-07-28
 draft: false
-image: "/images/girn_neuroplasticity.jpg"
 featured: true
 description: "Eine maßgebliche Übersicht zur Wirkung von Psychedelika auf die kortikale Konnektivität und neuronale Plastizität."
 categories:

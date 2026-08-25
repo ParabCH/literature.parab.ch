@@ -6,7 +6,6 @@ recommendation: "Blue Rabbit"
 
 date: 2026-07-28
 draft: false
-image: "/images/griffiths_2006.jpg"
 featured: true
 description: "Die historische Landmark-Studie der Johns Hopkins University, die das moderne Forschungs-Renewing einleitete."
 categories:

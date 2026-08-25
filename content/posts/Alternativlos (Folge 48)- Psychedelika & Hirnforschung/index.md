@@ -5,7 +5,6 @@ publication_year:
 recommendation: "Blue Rabbit"
 date: 2026-07-28
 draft: false
-image: "/images/alternativlos_48.jpg"
 featured: false
 description: "Ein stundenlanger, extrem detaillierter und akademisch-sachlicher Deep-Dive in Wirkmechanismen und Historie."
 categories:
