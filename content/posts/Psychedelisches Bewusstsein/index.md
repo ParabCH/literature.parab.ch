@@ -5,7 +5,7 @@ publication: "Integral, 2026"
 date: 2026-08-01
 draft: false
 featured: false
-image: "/images/Psychdelisches_Bewusstsein.jpg"
+image: "/images/Psychdelisches_Bewusstsein.png"
 description: "Markus Berger entwirft eine spirituelle und schamanische Kosmologie für Erfahrungen mit LSD, Psilocybin, DMT und anderen Psychedelika."
 categories:
   - Buch
