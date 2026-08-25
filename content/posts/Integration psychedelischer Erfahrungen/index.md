@@ -4,6 +4,7 @@ resource_author: "Claude Weill"
 publication: "Claude Weill, 2026"
 date: 2026-03-01
 draft: false
+image: "/images/GAIAMEDIA.webp"
 featured: false
 description: "Ein persönlicher Artikel über die Verarbeitung und Integration psychedelischer Erfahrungen."
 categories:

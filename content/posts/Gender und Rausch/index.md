@@ -4,6 +4,7 @@ resource_author: "Jonas Wandeler (Hg.)"
 publication: "Limmat Verlag, 2025"
 date: 2025-11-01
 draft: false
+image: "/images/GAIAMEDIA.webp"
 featured: false
 description: "Ein Reader über geschlechtsspezifische Erfahrungen, Zugang, Sicherheit und Akzeptanz beim Rausch und in der psychedelischen Therapie."
 categories:

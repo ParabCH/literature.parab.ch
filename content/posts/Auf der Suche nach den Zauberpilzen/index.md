@@ -4,6 +4,7 @@ resource_author: "SRF Impact"
 publication: "SRF, 19. November 2025"
 date: 2025-12-01
 draft: false
+image: "/images/GAIAMEDIA.webp"
 featured: false
 description: "Eine SRF-Reportage über Psilocybin, aktuelle Forschung, Psychotherapie sowie Chancen und Risiken des Konsums."
 categories:

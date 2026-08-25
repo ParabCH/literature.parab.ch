@@ -4,6 +4,7 @@ resource_author: "Ralph Metzner"
 publication: "Nachtschatten Verlag, 2025"
 date: 2025-12-01
 draft: false
+image: "/images/GAIAMEDIA.webp"
 featured: false
 description: "Fallgeschichten aus Ralph Metzners transpersonaler Praxis über Spiritualität, Reinkarnation, Ahnen und den gezielten Einsatz entheogener Substanzen."
 categories:

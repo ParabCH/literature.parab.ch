@@ -4,6 +4,7 @@ resource_author: "Cécile Denjean"
 publication: "ARTE, 2026"
 date: 2026-08-25
 draft: false
+image: "/images/Trance - Die Heilkraft der inneren Reise.jpg"
 featured: false
 description: "Eine Dokumentation über Trance, innere Reise und die kulturelle Bedeutung ritualisierter Bewusstseinszustände zwischen Spiritualität, Psychologie und Selbstfindung."
 youtube: "hgdeCOyxayo"

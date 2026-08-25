@@ -4,6 +4,7 @@ resource_author: "Zach Leary"
 publication: "Goldmann, 2026"
 date: 2026-07-01
 draft: false
+image: "/images/GAIAMEDIA.webp"
 featured: false
 description: "Zach Learys persönliche Annäherung an Timothy Learys Vermächtnis, die Bedeutung von Psychedelika und ihre sichere Integration in den Alltag."
 categories:

@@ -4,6 +4,7 @@ resource_author: "Françoise Bourzat, Kristina Hunter"
 publication: "Nachtschatten Verlag, 2025"
 date: 2025-12-01
 draft: false
+image: "/images/GAIAMEDIA.webp"
 featured: false
 description: "Ein ganzheitliches Modell für Vorbereitung, psychedelische Erfahrung und Integration, geprägt von therapeutischem und indigenem Wissen."
 categories:

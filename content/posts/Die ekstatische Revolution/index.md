@@ -4,6 +4,7 @@ resource_author: "Tom Saborowski"
 publication: "Nachtschatten Verlag, 2025"
 date: 2025-12-01
 draft: false
+image: "/images/GAIAMEDIA.webp"
 featured: false
 description: "Eine Geschichte von Timothy Learys psychedelischer Politik und der gesellschaftlichen Umwälzung der 1960er-Jahre."
 categories:
