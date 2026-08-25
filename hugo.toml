@@ -1,6 +1,6 @@
 baseURL = "http://literatur.psng.info/"
 languageCode = "de"
-title = "PSNG Literatur Blog"
+title = "PSNG Medien Blog"
 [pagination]
   pagerSize = 12
   summaryLength = 40
@@ -12,7 +12,7 @@ title = "PSNG Literatur Blog"
   category = "categories"
 
 [params]
-  description = "Ein kuratierter Raum für Paper, Bücher und sonstige Literatur zum Thema Psychedelika."
+  description = "Ein kuratierter Raum für Paper, Bücher, Filme und sonstige Medien zum Thema Psychedelika."
   author = "David"
   mainSections = ["posts"]
   readingSpeed = 200

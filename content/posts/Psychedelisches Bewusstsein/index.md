@@ -6,6 +6,7 @@ date: 2026-08-01
 draft: false
 image: "/images/GAIAMEDIA.webp"
 featured: false
+image: "/images/Psychdelisches_Bewusstsein.png"
 description: "Markus Berger entwirft eine spirituelle und schamanische Kosmologie für Erfahrungen mit LSD, Psilocybin, DMT und anderen Psychedelika."
 categories:
   - Buch
@@ -33,3 +34,4 @@ Markus Berger verbindet schamanische und mystische Traditionen mit aktuellen For
 ## Quelle
 
 [Vorstellung bei Gaia Media](https://www.gaiamedia.org/deutsch/2026/08/01/goodnews-august-2026-gut-zu-lesen/)
+

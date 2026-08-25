@@ -1,4 +1,4 @@
-# PSNG Literatur Blog
+# PSNG Medien Blog
 
 Hugo site for <http://literatur.psng.info/>. Push to `main` and it deploys itself.
 
