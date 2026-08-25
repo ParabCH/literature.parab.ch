@@ -3,7 +3,7 @@ title: "Hamilton Morris und NerveWing über dissoziative Anästhetika"
 resource_author: "Hamilton Morris, NerveWing"
 publication: "Hamilton Morris, 29. Mai 2026"
 date: 2026-05-29
-draft: false
+draft: true
 featured: false
 description: "Ein Kurzvideo über dissoziative Anästhetika und ihre Wirkung auf Wahrnehmung und Bewusstsein."
 youtube: "btV_ZCB9Up8"

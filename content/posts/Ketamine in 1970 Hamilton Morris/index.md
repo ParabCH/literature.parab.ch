@@ -3,7 +3,7 @@ title: "Ketamine in 1970"
 resource_author: "Hamilton Morris"
 publication: "Hamilton Morris, 8. Mai 2026"
 date: 2026-05-08
-draft: false
+draft: true
 featured: false
 description: "Ein historischer Rückblick auf Ketamin und seine frühe Verwendung in den 1970er-Jahren."
 youtube: "h0SmCNX5N_Q"

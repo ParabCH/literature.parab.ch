@@ -3,7 +3,7 @@ title: "Peruvian cactus shamanism"
 resource_author: "Hamilton Morris"
 publication: "Hamilton Morris, 4. Mai 2026"
 date: 2026-05-04
-draft: false
+draft: true
 featured: false
 description: "Ein Kurzvideo über peruanischen Kaktus-Schamanismus und die kulturelle Bedeutung psychoaktiver Kakteen."
 youtube: "Y4iTSLB8GeI"

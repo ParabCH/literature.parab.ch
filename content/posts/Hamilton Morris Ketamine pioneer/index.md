@@ -3,7 +3,7 @@ title: "Ketamine's pioneer missed something important"
 resource_author: "Hamilton Morris"
 publication: "Hamilton Morris, 29. Juni 2026"
 date: 2026-06-29
-draft: false
+draft: true
 featured: false
 description: "Hamilton Morris über die Geschichte der Ketaminforschung und eine wichtige Lücke in der Arbeit ihres Pioniers."
 youtube: "RedJjCyipcc"
