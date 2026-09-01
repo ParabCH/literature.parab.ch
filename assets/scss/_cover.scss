@@ -7,9 +7,9 @@
 
 .post-cover {
   container-type: inline-size;
-  aspect-ratio: 8 / 5;
+  aspect-ratio: 16 / 9;
   width: 100%;
-  overflow: hidden;
+  overflow: visible;
   background: linear-gradient(145deg, var(--cover-from) 0%, var(--cover-to) 100%);
   color: #fff;
 }
@@ -18,11 +18,12 @@
   position: relative;
   width: 100%;
   height: 100%;
-  padding: 6cqw 6.667cqw;
+  padding: 5.5cqw 5.75cqw;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .post-cover__glow {
@@ -76,17 +77,25 @@
 
 .post-cover__text {
   position: relative;
-  display: block;
-  max-width: 78cqw;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: calc(100% - 8cqw);
+  max-width: 100%;
 }
 
 .post-cover__title {
   display: block;
+  width: 100%;
+  max-width: 100%;
   font-family: $font-display;
   font-weight: 700;
-  font-size: 5.5cqw;
-  line-height: 1.12;
+  font-size: clamp(2rem, 5.1cqw, 4.25rem);
+  line-height: 1.08;
   letter-spacing: -0.015em;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  hyphens: auto;
 }
 
 .post-cover__rule {
